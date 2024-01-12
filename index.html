@@ -18,6 +18,8 @@
 <body onload="init()">
     <dialog open id="dialog" class="dialog">
         <section id="card" class="card">
+            <!-- rendering card -->
+
             <div class="card-top-bar flex-between-center">
                 <button class="header-button flex-center-center white">B</button>
                 <button class="header-button flex-center-center white">M</button>
@@ -30,7 +32,9 @@
                     <div id="card-type-2" class="card-type">Poison</div>
                 </div>
                 <div id="card-artwork-frame" class="flex-center-center">
-                    <img id="card-artwork" class="card-artwork" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="pokemon">
+                    <img id="card-artwork" class="card-artwork"
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+                        alt="pokemon">
                 </div>
             </article>
             <article id="card-info" class="card-info">
@@ -40,7 +44,11 @@
                     <a id="card-evolution">Evolution</a>
                     <a id="card-moves">Moves</a>
                 </nav>
+                <div id="card-info-content">
+                    <!-- rendering about, base stats, evolution or moves -->
+                </div>
             </article>
+            
         </section>
     </dialog>
     <header class="flex-between-center">
