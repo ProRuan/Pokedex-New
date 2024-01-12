@@ -23,6 +23,7 @@ async function includeHTML() {
 // -----
 // Clean Coding
 // openDialog() + includeHTML() + renderValues()
+// format output: e.g. Seed (without pokemon)
 
 
 // Tasks

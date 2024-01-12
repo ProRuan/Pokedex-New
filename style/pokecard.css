@@ -1,0 +1,91 @@
+.dialog {
+    margin: 0;
+    border: unset;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    color: black;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;;
+}
+
+dialog[open] {
+    display: flex;
+}
+
+.card {
+    /* padding: 40px 24px 32px 24px; */
+    width: 50%;
+    height: 100vh;
+    background-color: lightblue;
+}
+
+.card-top-bar {
+    padding: 40px 24px 0 24px;
+}
+
+.white {
+    color: white;
+}
+
+.card-header {
+    padding: 0 24px;
+    height: calc(50vh - 72px);
+    color: white;
+}
+
+.card-title {
+    margin: 20px 0 0 0 ;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+.card-index {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 16px;
+}
+
+.flex-row {
+    display: flex;
+    gap: 6px;
+}
+
+.card-type {
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 12px;
+    background-color: lightcoral;
+    border-radius: 16px;
+}
+
+.card-artwork {
+    width: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-info {
+    margin-top: -16px;
+    height: 50vh;
+    background-color: white;
+    border-radius: 24px 24px 0 0;
+}
+
+.card-info-bar {
+    padding: 40px 24px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 12px;
+}
+
+.link-active {
+    padding-bottom: 16px;
+    border-bottom: 2px solid mediumblue;
+}
