@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex App</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style/overview.css">
+
     <script src="script.js"></script>
+
+    <script src="./script/constant.js"></script>
+    <script src="./script/load.js"></script>
+    <script src="./script/record.js"></script>
 </head>
-<body>
-    
+
+<body onload="init()">
+    <nav class="flex-between-center">
+        <button class="nav-button flex-center-center">B</button>
+        <button class="nav-button flex-center-center">M</button>
+    </nav>
+    <main>
+        <h2 class="pokedex-headline">Pokedex</h2>
+        <section id="pokecard-collector" class="flex-column gap-12">
+            <!-- rendering pokecards -->
+        </section>
+    </main>
 </body>
+
 </html>

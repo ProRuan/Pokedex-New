@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    padding: 40px 24px 32px 24px;
+    height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.flex-between-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+button {
+    cursor: pointer;
+}
+
+.nav-button {
+    width: 32px;
+    height: 32px;
+    font-family: 'Open Sans', 'Gill Sans', 'Gill Sans MT', sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    background-color: transparent;
+    border: unset;
+    border-radius: 50%;
+}
+
+.nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.flex-center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokedex-headline {
+    margin: 16px 0 24px 0;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.gap-12 {
+    gap: 12px;
+}
+
+.pokecard {
+    padding: 16px;
+    width: calc(100% - 32px);
+    height: 160px;
+    color: white;
+    background-color: lightcoral;
+    border-radius: 20px;
+    position: relative;
+}
+
+.pokecard-id {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+.ta-right {
+    text-align: right;
+}
+
+.pokecard-name {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+.gap-8 {
+    gap: 8px;
+}
+
+.pokecard-type {
+    padding: 4px 16px;
+    width: fit-content;
+    font-size: 16px;
+    line-height: 20px;
+    background-color: lightblue;
+    border-radius: 16px;
+}
+
+.bottom-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.artwork {
+    width: 128px;
+    object-fit: cover;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
