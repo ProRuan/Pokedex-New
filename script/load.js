@@ -8,6 +8,7 @@ let species = [];    // receives the species of all 151 kanto pokemon
 async function init() {    // initializes the pokedex app
     await loadPokedata();
     recordPokemon();
+    renderPokecardCollection();
 }
 
 
