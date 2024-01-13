@@ -75,8 +75,36 @@ function formatId(id) {
 
 
 function writePokecardName(i) {
-    let name = getFormattedName(i);
+    let name = getFormattedNameFemale(i);
     return `<h3 id="pokecard-name-${i}" class="pokecard-name">${name}</h3>`
+}
+
+
+function getFormattedNameFemale(i) {
+    let name = getPokedexObjectValue(i, 'main', 'name');
+    let match = name == 'nidoran-f';
+    return (match) ? 'Nidoran&#9792' : getFormattedNameMale(i);
+}
+
+
+function getFormattedNameMale(i) {
+    let name = getPokedexObjectValue(i, 'main', 'name');
+    let match = name == 'nidoran-m';
+    return (match) ? 'Nidoran&#9794' : getFormattedNameD(i);
+}
+
+
+function getFormattedNameD(i) {
+    let name = getPokedexObjectValue(i, 'main', 'name');
+    let match = name == 'farfetchd';
+    return (match) ? 'Farfetch\'d' : getFormattedNameMr(i);
+}
+
+
+function getFormattedNameMr(i) {
+    let name = getPokedexObjectValue(i, 'main', 'name');
+    let match = name == 'mr-mime';
+    return (match) ? 'Mr. Mime' : getFormattedName(i);
 }
 
 
@@ -155,7 +183,7 @@ function getImage(i) {
 // Kommentare schreiben!!!
 
 // Farbe rendern (on card)
-// zu formatieren: nidoran-f, nidoran-m, porenta, pantimos
+// zu formatieren: nidoran-f, nidoran-m, porenta, pantimos (on card)
 // Passe card.html an --> einfach kopieren und bearbeiten.
 
 // flex column und/oder flex wrap
