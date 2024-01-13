@@ -100,33 +100,40 @@ dialog[open] {
     border-spacing: 0 16px;
 }
 
-td {
-    padding: 0;
-}
-
-.pr-16 {
-    padding-right: 16px;
-}
-
-.pr-24 {
-    padding-right: 24px;
-}
-
-.black-05 {
+.th-about {
+    padding: 0 16px 0 0;
+    width: 72px;
+    text-align: left;
     color: rgba(0, 0, 0, 0.5);
 }
 
+.td-about {
+    padding: 0;
+}
+
+.th-stats {
+    padding: 0 16px 0 0;
+    width: 56px;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.td-stats {
+    padding: 0 16px 0 0;
+    width: 24px;
+}
+
 .max-bar {
-    width: 160px;
     height: 4px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
     border-radius: 4px;
 }
 
 .value-bar {
     width: 45px;
     height: 4px;
-    background-color: green;
+    background-color: #88B69F;
+    /* background-color: #D4A6A6; */
     border-radius: 4px;
 }
 
@@ -136,11 +143,11 @@ td {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
 }
 
 .evolution-artwork {
-    width: 100px;
+    width: 120px;
     object-fit: cover;
     object-position: center;
     display: block;
@@ -153,31 +160,44 @@ td {
     text-align: center;
 }
 
-
-/* Bitte bearbeiten!!! */
-
-.pb-16 {
-    padding-bottom: 16px;
-}
-
 .bs-bottom {
     box-shadow: 0 1px rgba(0, 0, 0, 0.5);
 }
 
-.ta-left {
-    text-align: left;
-}
-
-.ta-center {
+.td-head-first {
+    padding: 0 16px 16px 0;
+    width: 72px;
+    color: rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
-.w-66 {
-    width: 33%;
+.td-head {
+    padding: 0 0 16px 0;
 }
 
+.th-moves {
+    padding: 0 16px 0 0;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5)
+}
 
-/* table-moves stylen!!! */
-/* table caption!!! */
+.td-moves {
+    padding: 0;
+}
 
-/* padding-bottom --> screen!!! */
+.bs-top {
+    box-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+}
+
+.td-foot-first {
+    padding: 16px 16px 0 0;
+    width: 72px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.td-foot {
+    padding: 16px 0 0 0;
+}
+
+/* table padding bottom --> sreen!!! */
