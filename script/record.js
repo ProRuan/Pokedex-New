@@ -7,7 +7,7 @@ load('pokedex');
 
 
 function recordPokemon() {    // records the pokemon' data
-    for (let i = 0; i < kantodex.length; i++) {
+    for (let i = 0; i < pokelist; i++) {
         pokedex[i] = {
             'main': recordMain(i),
             'about': recordAbout(i),
@@ -204,9 +204,3 @@ function pushVersionDetails(key, namesMethodsLevels, nameVersionMethodLevel) {  
         levels.push(level);    // push level of move m
     }
 }
-
-
-// Achtung: LOC ausgesetzt!!!
-
-// Calculate Total here!!!
-// Put Moves in order here!!!

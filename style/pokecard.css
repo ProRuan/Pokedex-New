@@ -91,8 +91,8 @@ dialog[open] {
     border-bottom: 2px solid mediumblue;
 }
 
-.table-about {
-    padding: 0 24px;
+.info-table {
+    padding: 0 24px 16px 24px;
     width: 100%;
     font-size: 12px;
     font-weight: bold;
@@ -100,10 +100,84 @@ dialog[open] {
     border-spacing: 0 16px;
 }
 
-.padding-0 {
+td {
     padding: 0;
 }
 
-.w-90 {
-    width: 90px;
+.pr-16 {
+    padding-right: 16px;
 }
+
+.pr-24 {
+    padding-right: 24px;
+}
+
+.black-05 {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.max-bar {
+    width: 160px;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.value-bar {
+    width: 45px;
+    height: 4px;
+    background-color: green;
+    border-radius: 4px;
+}
+
+.evolution-family {
+    padding: 16px 0 32px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+}
+
+.evolution-artwork {
+    width: 100px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.evolution-subtext {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 12px;
+    text-align: center;
+}
+
+
+/* Bitte bearbeiten!!! */
+
+.pb-16 {
+    padding-bottom: 16px;
+}
+
+.bs-bottom {
+    box-shadow: 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.ta-left {
+    text-align: left;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.w-66 {
+    width: 33%;
+}
+
+
+/* table-moves stylen!!! */
+/* table caption!!! */
+
+/* padding-bottom --> screen!!! */

@@ -1,51 +1,53 @@
 // Variables
-let kantodex;    // receives 'name' and 'url' of all 151 kanto pokemon
-let pokelist = [];    // receives the names of all 151 kanto pokemon
+let pokelist = 151;    // number of loading pokemon (kanto pokedex)
 let pokemon = [];    // receives the datasets of all 151 kanto pokemon
 let species = [];    // receives the species of all 151 kanto pokemon
 
 
 // Functions
-load('kantodex');
-
-
 async function init() {    // initializes the pokedex app
     await loadPokedata();
     recordPokemon();
 }
 
 
-async function loadPokedata() {
-    await loadPokelist();
-    await loadPokemon();
-    await loadSpecies();
+async function loadPokedata() {    // loads ...
+    await loadPokemon();    // dataset of pokemon
+    await loadSpecies();    // species of pokemon
 }
 
 
-async function loadPokelist() {    // provides the pokelist
-    await loadKantodex();
-    await getPokelist();
+async function loadPokemon() {    // provides the dataset of pokemon
+    for (let i = 0; i < pokelist; i++) {
+        let url = getUrl(i);    // url i
+        let response = await fetch(url);    // dataset i
+        let pokedata = await response.json();    // dataset i as json
+        pokemon.push(pokedata);    // adds dataset i to pokemon
+    }
 }
 
-async function loadKantodex() {    // provides the data of kanto pokedex
-    let url = `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151`;    // url to data
-    let response = await fetch(url);    // data
-    let pokedata = await response.json();    // data as json
-    kantodex = getJsonObjectValue(pokedata, 'results');    // data of kanto pokedex
-    save('kantodex', kantodex);
+
+function getUrl(i) {    // provides the url of pokemon i
+    let id = i + 1;
+    return 'https://pokeapi.co/api/v2/pokemon/' + id;
 }
+
+
+async function loadSpecies() {    // provides the species of pokemon
+    for (let i = 0; i < pokelist; i++) {
+        let keys = [i, 'species', 'url'];    // keys of subsequent json
+        let url = getJsonObjectDeepValue(pokemon, keys);    // url to dataset i
+        let response = await fetch(url);    // dataset i
+        let pokedata = await response.json();    // dataset i as json
+        keys = ['genera', 7, 'genus'];
+        let genus = getJsonObjectDeepValue(pokedata, keys);    // genus i
+        species.push(genus);    // adds genus i to species
+    }
+}
+
 
 function getJsonObjectValue(variable, key) {    // provides a json's value by key
     return variable[key];
-}
-
-
-async function getPokelist() {    // provides the names of all 151 kanto pokemon
-    for (let i = 0; i < kantodex.length; i++) {
-        let keys = [i, 'name'];    // keys of subsequent json
-        let name = getJsonObjectDeepValue(kantodex, keys);    // name i
-        pokelist.push(name);    // adds name i to pokelist
-    }
 }
 
 
@@ -56,30 +58,6 @@ function getJsonObjectDeepValue(variable, keys) {    // provides a json's value 
         value = value[key];
     }
     return value;
-}
-
-
-async function loadPokemon() {    // provides the dataset of pokemon by their names
-    for (let i = 0; i < pokelist.length; i++) {
-        let name = getJsonObjectValue(pokelist, i);    // name i
-        let url = `https://pokeapi.co/api/v2/pokemon/${name}`;    // url to dataset i
-        let response = await fetch(url);    // dataset i
-        let pokedata = await response.json();    // dataset i as json
-        pokemon.push(pokedata);    // adds dataset i to pokemon
-    }
-}
-
-
-async function loadSpecies() {    // provides the species of pokemon
-    for (let i = 0; i < pokelist.length; i++) {
-        let keys = [i, 'species', 'url'];    // keys of subsequent json
-        let url = getJsonObjectDeepValue(pokemon, keys);    // url to dataset i
-        let response = await fetch(url);    // dataset i
-        let pokedata = await response.json();    // dataset i as json
-        keys = ['genera', 7, 'genus'];
-        let genus = getJsonObjectDeepValue(pokedata, keys);    // genus i
-        species.push(genus);    // adds genus i to species
-    }
 }
 
 

@@ -25,6 +25,9 @@ async function includeHTML() {
 // openDialog() + includeHTML() + renderValues()
 // format output: e.g. Seed (without pokemon)
 
+// Calculate Total there!!!
+// Put Moves in order there!!!
+
 
 // Tasks
 // -----
