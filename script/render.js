@@ -26,7 +26,7 @@ function fillPokecardCollector(pokecardCollector) {
 function renderPokecard(i) {
     let color = getColor(i, 0);
     return `
-        <article id="pokecard-${i}" class="pokecard ${color} flex-column gap-12">
+        <article id="pokecard-${i}" class="pokecard ${color} flex-column gap-12" onclick="showCard(${i})">
             ${writePokecardIdName(i)}
             ${writePokecardTypeGroup(i)}
             ${writePokecardImage(i)}
@@ -110,12 +110,12 @@ function getFormattedNameMr(i) {
 
 function getFormattedName(i) {
     let nameUnformatted = getPokedexObjectValue(i, 'main', 'name');
-    let name = formatName(nameUnformatted)
+    let name = formatFirstLetter(nameUnformatted)
     return name;
 }
 
 
-function formatName(name) {
+function formatFirstLetter(name) {
     let first = name[0];
     let capital = first.toUpperCase();
     return name.replace(first, capital);
@@ -163,7 +163,7 @@ function getSlot(j) {
 function getFormattedType(i, j) {
     let types = getPokedexObjectValue(i, 'main', 'types');
     let typeUnformatted = types[j];
-    let type = formatName(typeUnformatted);
+    let type = formatFirstLetter(typeUnformatted);
     return type;
 }
 
@@ -178,6 +178,167 @@ function writePokecardImage(i) {
 function getImage(i) {
     return getPokedexObjectValue(i, 'main', 'image');
 }
+
+
+
+
+async function showCard(i) {
+    openDialog();
+    await includeHTML('include-card');
+    renderCard(i);
+}
+
+
+function openDialog() {
+    document.getElementById('dialog').show();
+}
+
+
+function stop(event) {
+    event.stopPropagation();
+}
+
+
+function closeDialog() {
+    document.getElementById('dialog').close();
+}
+
+
+async function includeHTML(attribute) {
+    let inclusion = document.querySelectorAll(`[${attribute}]`);    // check
+    for (let i = 0; i < inclusion.length; i++) {
+        const element = inclusion[i];
+        file = element.getAttribute(attribute);    // check
+        let response = await fetch(file);
+        if (response.ok) {
+            element.innerHTML = await response.text();
+        } else {
+            element.innerHTML = 'Page not found.';
+        }
+    }
+}
+
+
+async function renderCard(i) {
+    setCardColor(i);
+    renderCardMain(i);
+    await includeHTML('include-card-info');
+    renderCardAbout(i);
+}
+
+
+function renderCardMain(i) {
+    renderCardName(i);
+    renderCardId(i);
+    renderCardTypeGroup(i);
+    renderCardArtwork(i);
+}
+
+
+function setCardColor(i) {
+    let color = getColor(i, 0);
+    let card = getElement('card');
+    card.classList.replace('grass', color);
+}
+// classOnCommmand + just add (not replace) + css!!!
+
+
+function renderCardName(i) {
+    let name = getFormattedNameFemale(i);
+    outputValue('card-name', name);
+}
+
+
+function outputValue(id, value) {
+    document.getElementById(id).innerHTML = value;
+}
+
+
+function renderCardId(i) {
+    let id = getFormattedId(i);
+    outputValue('card-id', id);
+}
+
+
+function renderCardTypeGroup(i) {
+    let types = getPokedexObjectValue(i, 'main', 'types');
+    let typeGroup = getElement('card-type-group');
+    typeGroup.innerHTML = '';
+    for (let j = 0; j < types.length; j++) {
+        renderCardType(i, j, typeGroup);
+    }
+}
+
+
+function renderCardType(i, j, typeGroup) {
+    let color = getColor(i, j);
+    let type = getFormattedType(i, j);
+    typeGroup.innerHTML += `<div id="card-type-${j}" class="card-type type-${color}">${type}</div>`;
+}
+
+
+function renderCardArtwork(i) {
+    let image = getPokedexObjectValue(i, 'main', 'image');
+    setImageSource('card-artwork', image);
+}
+
+
+function setImageSource(id, image) {
+    document.getElementById(id).src = image;
+}
+
+
+function renderCardAbout(i) {
+    renderInfoSpecies(i);
+    renderInfoHeight(i);
+    renderInfoWeight(i);
+}
+
+// Bitte folgende Funktionen updaten
+function renderInfoSpecies(i) {
+    let species = getFormattedSpecies(i);
+    outputValue('info-species', species);
+}
+
+
+function getFormattedSpecies(i) {
+    let speciesUnformatted = getPokedexObjectValue(i, 'about', 'species');
+    let species = formatSpecies(speciesUnformatted);
+    return species;
+}
+
+
+function formatSpecies(species) {
+    let space = species.indexOf(' ');
+    let copy = species;
+    species = '';
+    for (let i = 0; i < space; i++) {
+        species += copy[i];
+    }
+    return species;
+}
+
+
+function renderInfoHeight(i) {
+    let height = getFormattedValue(i, 'height');
+    outputValue('info-height', height);
+}
+
+
+function getFormattedValue(i, key) {
+    let valueAsInteger = getPokedexObjectValue(i, 'about', key);
+    let value = valueAsInteger / 10;
+    return value;
+}
+
+
+function renderInfoWeight(i) {
+    let weight = getFormattedValue(i, 'weight');
+    outputValue('info-weight', weight);
+}
+
+
+// renderInfoAbilities(i)
 
 
 // Kommentare schreiben!!!

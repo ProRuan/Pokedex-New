@@ -1,14 +1,13 @@
-<section id="card" class="card">
+<section id="card" class="card grass" onclick="stop(event)">
     <div class="card-top-bar flex-between-center">
         <button class="header-button flex-center-center white">B</button>
         <button class="header-button flex-center-center white">M</button>
     </div>
     <article id="card-header" class="card-header">
-        <h1 id="card-title" class="card-title">Bulbasaur</h1>
-        <div id="card-index" class="card-index ta-right">#001</div>
+        <h1 id="card-name" class="card-title">Bulbasaur</h1>
+        <div id="card-id" class="card-index ta-right">#001</div>
         <div id="card-type-group" class="flex-row">
-            <div id="card-type-1" class="card-type">Grass</div>
-            <div id="card-type-2" class="card-type">Poison</div>
+            <!-- rendering card type group's content -->
         </div>
         <div id="card-artwork-frame" class="flex-center-center">
             <img id="card-artwork" class="card-artwork"
@@ -23,6 +22,7 @@
             <a id="card-evolution">Evolution</a>
             <a id="card-moves">Moves</a>
         </nav>
-        <div id="card-info-content">
+        <div id="card-info-content" include-card-info="./templates/about.html">
             <!-- rendering about, base stats, evolution or moves -->
+        </div>
 </section>
