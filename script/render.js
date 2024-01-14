@@ -292,6 +292,7 @@ function renderCardAbout(i) {
     renderInfoSpecies(i);
     renderInfoHeight(i);
     renderInfoWeight(i);
+    renderInfoAbilities(i);
 }
 
 // Bitte folgende Funktionen updaten
@@ -381,7 +382,26 @@ function formatMinus(initial, letter) {
 }
 
 
-// renderInfoAbilities(i)
+function renderInfoAbilities(i) {
+    let abilities = getFormattedAbilities(i);
+    outputValue('info-abilities', abilities);
+}
+
+
+function getFormattedAbilities(i) {
+    let abilities = '';
+    let abilitiesUnformatted = getPokedexObjectValue(i, 'about', 'abilities');
+    for (let j = 0; j < abilitiesUnformatted.length; j++) {
+        let abilityUnformatted = abilitiesUnformatted[j];
+        let ability = getFormattedInlineNames(abilityUnformatted);
+        if (j > 0) {
+            abilities += `, ${ability}`;
+        } else {
+            abilities += ability;
+        }
+    }
+    return abilities;
+}
 
 
 // Kommentare schreiben!!!
