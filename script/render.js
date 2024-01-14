@@ -338,6 +338,49 @@ function renderInfoWeight(i) {
 }
 
 
+function getFormattedInlineNames(name) {
+    let renaming = '';
+    let initial = true;
+    renaming = getRenaming(name, renaming, initial);
+    return renaming;
+}
+
+
+function getRenaming(name, renaming, initial) {
+    for (let i = 0; i < name.length; i++) {
+        let letter = name[i];
+        let minus = letter.indexOf('-') > -1;
+        [letter, initial] = formatInitialOrMinus(initial, letter, minus);
+        renaming += letter;
+    }
+    return renaming;
+}
+
+
+function formatInitialOrMinus(initial, letter, minus) {
+    return (initial) ? formatInitial(initial, letter) : formatMinusOrReturnLetter(initial, letter, minus);
+}
+
+
+function formatInitial(initial, letter) {
+    letter = letter.toUpperCase();
+    initial = false;
+    return [letter, initial];
+}
+
+
+function formatMinusOrReturnLetter(initial, letter, minus) {
+    return (minus) ? formatMinus(initial, letter) : letter;
+}
+
+
+function formatMinus(initial, letter) {
+    letter = ' ';
+    initial = true;
+    return [letter, initial];
+}
+
+
 // renderInfoAbilities(i)
 
 
