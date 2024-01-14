@@ -183,7 +183,15 @@ function getFormattedAbilities(i) {
 }
 
 
+function renderCardStats() {
+    setIncludingAttribute(fileStats)
+    includeHTML('include-card-info');
+}
 
 
+function setIncludingAttribute(file) {
+    let content = getElement('card-info-content');
+    content.setAttribute('include-card-info', fileStats);
+}
 
 // search, filter, render in render-cards.js

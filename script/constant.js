@@ -31,3 +31,9 @@ const evolution = [
     false, true, true, false, false,
     false
 ];
+
+
+const fileAbout = './templates/about.html';
+const fileStats = './templates/stats.html';
+const fileEvolution = './templates/evolution.html';
+const fileMoves = './templates/moves.html';
