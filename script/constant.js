@@ -37,3 +37,5 @@ const fileAbout = './templates/about.html';
 const fileStats = './templates/stats.html';
 const fileEvolution = './templates/evolution.html';
 const fileMoves = './templates/moves.html';
+const fileSearch = './templates/search.html';
+const filefilter = './templates/filter.html';

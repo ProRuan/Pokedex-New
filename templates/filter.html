@@ -1,36 +1,33 @@
 <h4 id="filter-title" class="search-title">Filter Types</h4>
 <form onsubmit="return false">
-    <h5 id="filter-conditions-title" class="filter-subtitle">Set conditions</h5>
-    <fieldset id="filter-conditions-group" class="filter-fieldset">
-        <input id="filter-also-second" class="filter-button" type="button" value="also second">
-        <input id="filter-by-first" class="filter-button" type="button" value="by first">
-        <input id="filter-only-pure" class="filter-button" type="button" value="only pure">
+    <h5 id="filter-condition-title" class="filter-subtitle">Set conditions</h5>
+    <fieldset id="filter-condition-group" class="filter-fieldset">
+        <input id="filter-by-first" class="filter-button" type="button" value="by first" onclick="setFilterByFirst('by-first', true)">
+        <input id="filter-only-pure" class="filter-button" type="button" value="only pure" onclick="setFilterOnlyPure('only-pure', true)">
     </fieldset>
-    <h5 id="filter-types-title" class="filter-subtitle">Choose Types</h5>
-    <fieldset id="filter-types-group" class="filter-fieldset">
-        <!-- rendering filter type buttons -->
-
-        <!-- Please delete!!! -->
-        <input class="filter-type grass" type="button" value="grass">
-        <input class="filter-type fire" type="button" value="fire">
-        <input class="filter-type water" type="button" value="water">
-        <input class="filter-type grass" type="button" value="grass">
-        <input class="filter-type fire" type="button" value="fire">
-        <input class="filter-type water" type="button" value="water">
-        <input class="filter-type grass" type="button" value="grass">
-        <input class="filter-type fire" type="button" value="fire">
-        <input class="filter-type water" type="button" value="water">
-        <input class="filter-type grass" type="button" value="grass">
-        <input class="filter-type fire" type="button" value="fire">
-        <input class="filter-type water" type="button" value="water">
-        <input class="filter-type grass" type="button" value="grass">
-        <input class="filter-type fire" type="button" value="fire">
-        <input class="filter-type water" type="button" value="water">
-        <input class="filter-type grass" type="button" value="grass">
-        <input class="filter-type fire" type="button" value="fire">
-        <input class="filter-type water" type="button" value="water">
+    <h5 id="filter-type-group-title" class="filter-subtitle">Choose Types</h5>
+    <fieldset id="filter-type-group" class="filter-fieldset">
+        <input class="filter-type filter-normal" type="button" value="normal">
+        <input class="filter-type filter-fire" type="button" value="fire">
+        <input class="filter-type filter-water" type="button" value="water">
+        <input class="filter-type filter-electric" type="button" value="electric">
+        <input class="filter-type filter-grass" type="button" value="grass">
+        <input class="filter-type filter-flying" type="button" value="flying">
+        <input class="filter-type filter-bug" type="button" value="bug">
+        <input class="filter-type filter-poison" type="button" value="poison">
+        <input class="filter-type filter-rock" type="button" value="rock">
+        <input class="filter-type filter-ground" type="button" value="ground">
+        <input class="filter-type filter-fighting" type="button" value="fighting">
+        <input class="filter-type filter-ice" type="button" value="ice">
+        <input class="filter-type filter-psychic" type="button" value="psychic">
+        <input class="filter-type filter-ghost" type="button" value="ghost">
+        <input class="filter-type filter-dragon" type="button" value="dragon">
+        <input class="filter-type filter-dark" type="button" value="dark">
+        <input class="filter-type filter-steel" type="button" value="steel">
+        <input class="filter-type filter-fairy" type="button" value="fairy">
     </fieldset>
     <fieldset id="filter-output" class="filter-fieldset">
         <output class="filter-hits">155 hits</output>
+        <button class="filter-close-button" onclick="closeMenu()">Close</button>
     </fieldset>
 </form>

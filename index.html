@@ -16,6 +16,7 @@
     <script src="./script/load.js"></script>
     <script src="./script/record.js"></script>
     <script src="./script/render-cards.js"></script>
+    <script src="./script/filter.js"></script>
     <script src="./script/render-info.js"></script>
 </head>
 
@@ -25,8 +26,8 @@
     </dialog>
 
     <header class="flex-between-center">
-        <button class="header-button flex-center-center">B</button>
-        <button class="header-button flex-center-center">M</button>
+        <button id="header-back-button" class="header-button flex-center-center">B</button>
+        <button id="header-menu-button" class="header-button flex-center-center" onclick="openMenu()">M</button>
     </header>
 
     <main>
@@ -36,12 +37,12 @@
         </section>
     </main>
 
-    <aside id="pokedex-menu" class="pokedex-menu pm-opened">
+    <aside id="pokedex-menu" class="pokedex-menu">
         <section id="pokedex-menu-header" class="pokedex-menu-link-group">
-            <a class="pokedex-menu-link">Search</a> |
-            <a>Filter</a>
+            <button id="search-button" class="pokedex-menu-button" onclick="includeMenuSearch()">Search</button> |
+            <button id="filter-button" class="pokedex-menu-button pokedex-menu-button-active" onclick="includeMenuFilter()">Filter</button>
         </section>
-        <section id="pokedex-menu-content" include-menu-content="./templates/search.html">
+        <section id="pokedex-menu-content" class="pokedex-menu-content" include-menu-content="./templates/search.html">
             <!-- rendering search bar or filter settings -->
         </section>
     </aside>

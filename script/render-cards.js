@@ -1,24 +1,3 @@
-// Variables
-let searchPokemon = [
-    {
-        'enabled': false,
-        'hits': 0
-    }
-];
-
-
-let filterTypes = [
-    {
-        'enabled': false,
-        'types': [],
-        'by-first': false,
-        'only-pure': false,
-        'hits': 0
-    }
-];
-// render menu + render search and filter content
-
-
 // Functions
 function renderPokecardCollection() {
     pokecardCollector = getElement('pokecard-collector');
@@ -236,6 +215,79 @@ async function includeHTML(attribute) {
 }
 
 
+// Funktionen verschieben???
+
+
+function openMenu() {
+    setClassOnCommand('pokedex-menu', 'add', 'pm-opened');
+    setElementAttribute('header-menu-button', 'onclick', 'closeMenu()');
+    includeMenuSearch();
+}
+
+
+function setElementAttribute(id, attribute, value) {
+    document.getElementById(id).setAttribute(attribute, value);
+}
+
+
+function closeMenu() {
+    setClassOnCommand('pokedex-menu', 'remove', 'pm-opened');
+    setElementAttribute('header-menu-button', 'onclick', 'openMenu()');
+    let content = getElement('pokedex-menu-content');
+    content.innerHTML = '<!-- rendering search bar or filter settings -->';
+}
+
+
+function includeMenuSearch() {
+    setElementAttribute('pokedex-menu-content', 'include-menu-content', fileSearch);
+    includeHTML('include-menu-content');
+    setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
+    setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
+    setButtonDisabled('search-button', true);
+    setButtonDisabled('filter-button', false);
+}
+
+
+function setButtonDisabled(id, logical) {
+    document.getElementById(id).disabled = logical;
+}
+
+
+function includeMenuFilter() {
+    setElementAttribute('pokedex-menu-content', 'include-menu-content', filefilter);
+    includeHTML('include-menu-content');
+    setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
+    setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
+    setButtonDisabled('search-button', false);
+    setButtonDisabled('filter-button', true);
+}
+
+
+function setClassOnCommand(id, command, className) {
+    let toggling = command == 'toggle';
+    (toggling) ? toggleClass(id, className) : addOrRemoveClass(id, command, className);
+}
+
+
+function toggleClass(id, className) {
+    document.getElementById(id).classList.toggle(className);
+}
+
+
+function addOrRemoveClass(id, command, className) {
+    let adding = command == 'add';
+    (adding) ? addClass(id, className) : removeClass(id, className);
+}
+
+
+function addClass(id, className) {
+    document.getElementById(id).classList.add(className);
+}
+
+
+function removeClass(id, className) {
+    document.getElementById(id).classList.remove(className);
+}
 
 
 
