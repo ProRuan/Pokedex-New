@@ -1,3 +1,23 @@
+// Variables
+let searchPokemon = [
+    {
+        'enabled': false,
+        'hits': 0
+    }
+];
+
+
+let filterTypes = [
+    {
+        'enabled': false,
+        'types': [],
+        'by-first': false,
+        'only-pure': false,
+        'hits': 0
+    }
+];
+
+
 // Functions
 function renderPokecardCollection() {
     pokecardCollector = getElement('pokecard-collector');

@@ -3,7 +3,9 @@ body {
     padding: 40px 24px 32px 24px;
     height: calc(100vh - 72px);
     font-family: 'Open Sans', sans-serif;
+    background-color: rgba(0, 0, 0, 0.1);
 }
+/* height passt nicht!!! */
 
 .flex-between-center {
     display: flex;

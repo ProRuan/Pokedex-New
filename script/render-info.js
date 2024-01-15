@@ -194,4 +194,6 @@ function setIncludingAttribute(file) {
     content.setAttribute('include-card-info', fileStats);
 }
 
+
+// stats values in relation or fixed table width
 // search, filter, render in render-cards.js

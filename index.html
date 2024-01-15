@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./style/overview.css">
     <link rel="stylesheet" href="./style/card.css">
     <link rel="stylesheet" href="./style/color.css">
+    <link rel="stylesheet" href="./style/menu.css">
 
     <script src="script.js"></script>
 
@@ -22,16 +23,29 @@
     <dialog id="dialog" class="dialog" include-card="./templates/card.html" onclick="closeDialog()">
         <!-- rendering card -->
     </dialog>
+
     <header class="flex-between-center">
         <button class="header-button flex-center-center">B</button>
         <button class="header-button flex-center-center">M</button>
     </header>
+
     <main>
         <h2 class="pokedex-headline">Pokedex</h2>
         <section id="pokecard-collector" class="flex-column gap-12">
             <!-- rendering pokecards -->
         </section>
     </main>
+
+    <aside id="pokedex-menu" class="pokedex-menu">
+
+        <div class="pokedex-menu-link-group">
+            <a class="pokedex-menu-link">Search</a> |
+            <a>Filter</a>
+        </div>
+
+        
+
+    </aside>
 </body>
 
 </html>
