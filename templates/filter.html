@@ -1,13 +1,16 @@
-<h4 class="search-title">Filter Types</h4>
+<h4 id="filter-title" class="search-title">Filter Types</h4>
 <form onsubmit="return false">
-    <h5 class="filter-subheadline">Set conditions</h5>
-    <fieldset class="filter-fieldset">
-        <input class="filter-button" type="button" value="also second">
-        <input class="filter-button" type="button" value="by first">
-        <input class="filter-button" type="button" value="only pure">
+    <h5 id="filter-conditions-title" class="filter-subtitle">Set conditions</h5>
+    <fieldset id="filter-conditions-group" class="filter-fieldset">
+        <input id="filter-also-second" class="filter-button" type="button" value="also second">
+        <input id="filter-by-first" class="filter-button" type="button" value="by first">
+        <input id="filter-only-pure" class="filter-button" type="button" value="only pure">
     </fieldset>
-    <h5 class="filter-subheadline">Choose Types</h5>
-    <fieldset class="filter-fieldset">
+    <h5 id="filter-types-title" class="filter-subtitle">Choose Types</h5>
+    <fieldset id="filter-types-group" class="filter-fieldset">
+        <!-- rendering filter type buttons -->
+
+        <!-- Please delete!!! -->
         <input class="filter-type grass" type="button" value="grass">
         <input class="filter-type fire" type="button" value="fire">
         <input class="filter-type water" type="button" value="water">
@@ -26,5 +29,8 @@
         <input class="filter-type grass" type="button" value="grass">
         <input class="filter-type fire" type="button" value="fire">
         <input class="filter-type water" type="button" value="water">
+    </fieldset>
+    <fieldset id="filter-output" class="filter-fieldset">
+        <output class="filter-hits">155 hits</output>
     </fieldset>
 </form>

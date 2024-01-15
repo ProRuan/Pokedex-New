@@ -16,6 +16,7 @@ let filterTypes = [
         'hits': 0
     }
 ];
+// render menu + render search and filter content
 
 
 // Functions

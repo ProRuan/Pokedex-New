@@ -36,15 +36,14 @@
         </section>
     </main>
 
-    <aside id="pokedex-menu" class="pokedex-menu">
-
-        <div class="pokedex-menu-link-group">
+    <aside id="pokedex-menu" class="pokedex-menu pm-opened">
+        <section id="pokedex-menu-header" class="pokedex-menu-link-group">
             <a class="pokedex-menu-link">Search</a> |
             <a>Filter</a>
-        </div>
-
-        
-
+        </section>
+        <section id="pokedex-menu-content" include-menu-content="./templates/search.html">
+            <!-- rendering search bar or filter settings -->
+        </section>
     </aside>
 </body>
 
