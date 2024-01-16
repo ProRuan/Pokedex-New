@@ -80,8 +80,10 @@
 .search-hits {
     width: 56px;
     font-size: 14px;
+    font-weight: bold;
     line-height: 18px;
     text-align: right;
+    color: #7986DF;
 }
 
 .filter-subtitle {
@@ -129,7 +131,9 @@
     padding-top: 16px;
     width: 100%;
     font-size: 14px;
+    font-weight: bold;
     line-height: 18px;
+    color: #7986DF;
     box-shadow: 0 -1px rgba(0, 0, 0, 0.3);
 }
 

@@ -6,8 +6,7 @@ let filterPokemon = {
     'enabled': false,
     'types': [],
     'by-first': false,
-    'only-pure': false,
-    'hits': 0
+    'only-pure': false
 };
 
 
@@ -21,17 +20,16 @@ let filterTypeGroup = [
 
 
 function verifySearchValue() {    // Please edit search functions!!!
-    resetHits();
-    let input = getElementValue('search-input');
-    let enabled = input.length > 0;
-    (enabled) ? searchPokemon = true : searchPokemon = false;
+    searchPokemon = true;
+    resetHits('search-hits');
     renderPokecardCollection();
-    showHits();
-}
+    showHits(searchPokemon, 'search-hits');
+    searchPokemon = false;
+}    // set search true and false???
 
 
-function resetHits() {
-    document.getElementById('search-hits').innerHTML = '';
+function resetHits(id) {
+    document.getElementById(id).innerHTML = '';
 }
 
 
@@ -40,10 +38,10 @@ function countHits() {
 }
 
 
-function showHits() {
-    if (searchPokemon) {
+function showHits(logical, id) {
+    if (logical) {
         let count = countHits();
-        let hits = getElement('search-hits');
+        let hits = getElement(id);
         setHits(count, hits);
     }
 }
@@ -91,7 +89,7 @@ function searchPokecardById(i, input) {
 
 
 function closeSearch() {
-    searchPokemon['enabled'] = false;
+    searchPokemon = false;
     closeMenu(true);
     return false;
 }
@@ -113,14 +111,14 @@ function fillFilterTypeGroup(content) {
 
 function renderFilterType(i) {
     let type = filterTypeGroup[i];
-    return `<input id="filter-${type}" class="filter-type filter-default filter-${type}" type="button" value="${type}" onclick="addFilterType('${type}')">`;
+    return `<input id="filter-${type}" class="filter-type filter-default filter-${type}" type="button" value="${type}" onclick="addFilterType('${type}'); verifyFilterValue()">`;
 }
 
 
 function addFilterType(type) {
     pushFilterType(type);
     setFilterButton(`filter-${type}`, type);
-    setElementAttribute(`filter-${type}`, 'onclick', `removeFilterType('${type}')`);
+    setElementAttribute(`filter-${type}`, 'onclick', `removeFilterType('${type}'); verifyFilterValue()`);
 }
 
 
@@ -139,7 +137,7 @@ function setFilterButton(id, classFraction) {
 function removeFilterType(type) {
     spliceFilterType(type);
     setFilterButton(`filter-${type}`, type);
-    setElementAttribute(`filter-${type}`, 'onclick', `addFilterType('${type}')`);
+    setElementAttribute(`filter-${type}`, 'onclick', `addFilterType('${type}'); verifyFilterValue()`);
 }
 
 
@@ -155,7 +153,7 @@ function setFilterByFirst(logical) {    // vereinfachen???
     setButtonDisabled('filter-only-pure', logical);
     logical = setLogical(logical);
     setClassOnCommand('filter-only-pure', 'toggle', 'filter-condition');
-    setElementAttribute('filter-by-first', 'onclick', `setFilterByFirst(${logical})`);
+    setElementAttribute('filter-by-first', 'onclick', `setFilterByFirst(${logical}); verifyFilterValue()`);
 }
 
 
@@ -175,9 +173,50 @@ function setFilterOnlyPure(logical) {
     setButtonDisabled('filter-by-first', logical);
     logical = setLogical(logical);
     setClassOnCommand('filter-by-first', 'toggle', 'filter-condition');
-    setElementAttribute('filter-only-pure', 'onclick', `setFilterOnlyPure(${logical})`);
+    setElementAttribute('filter-only-pure', 'onclick', `setFilterOnlyPure(${logical}); verifyFilterValue()`);
 }
 
+
+function verifyFilterValue() {    // Please edit search functions!!!
+    filterPokemonOn();
+    resetHits('filter-hits');
+    renderPokecardCollection();
+    showHits(filterPokemon['enabled'], 'filter-hits');
+    filterPokemonOff();
+}
+
+
+function filterPokemonOn() {
+    filterPokemon['enabled'] = true;
+}
+
+
+function filterPokemonOff() {
+    filterPokemon['enabled'] = false;
+}
+
+
+// CloseMenuFilter() + CloseMenuSearch()
+// Think about toggle / add / remove
+
+function home() {
+    setFilterSettings();
+    renderPokecardCollection();
+}    
+
+// closeFilter:check, aber closeMenu und inlcudeSearch fehlt noch!!!
+// oder einfach nur filterPokemon bei includeFitler neu definieren!!!
+
+
+// closeMenu --> reset search input and filter variables
+// openMenu --> reload the values
+// Doppelfuntkion in html!!!
+// Result (hits) und close formatieren!!!
+// Move filter functions!!!
+
+// menu header und/oder close button einfuegen!!!
+// if input == empty or filter == empty renderPokecard(i)!!!
+// filterOptions as second group!!!
 
 // filter function zusammenfassen???
 // hits only with output!!!

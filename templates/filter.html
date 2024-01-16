@@ -1,16 +1,16 @@
 <h4 id="filter-title" class="search-title">Filter Types</h4>
 <form onsubmit="return false">
-    <h5 id="filter-condition-title" class="filter-subtitle">Set conditions (optional)</h5>
-    <fieldset id="filter-condition-group" class="filter-fieldset">
-        <input id="filter-by-first" class="filter-type filter-default filter-condition" type="button" value="by first" onclick="setFilterByFirst(true)">
-        <input id="filter-only-pure" class="filter-type filter-default filter-condition" type="button" value="only pure" onclick="setFilterOnlyPure(true)">
-    </fieldset>
     <h5 id="filter-type-group-title" class="filter-subtitle">Choose Types</h5>
     <fieldset id="filter-type-group" class="filter-fieldset">
         <!-- rendering filter types -->
     </fieldset>
+    <h5 id="filter-condition-title" class="filter-subtitle">Set conditions (optional)</h5>
+    <fieldset id="filter-condition-group" class="filter-fieldset">
+        <input id="filter-by-first" class="filter-type filter-default filter-condition" type="button" value="by first" onclick="setFilterByFirst(true); verifyFilterValue()">
+        <input id="filter-only-pure" class="filter-type filter-default filter-condition" type="button" value="only pure" onclick="setFilterOnlyPure(true); verifyFilterValue()">
+    </fieldset>
     <fieldset id="filter-output" class="filter-fieldset">
-        <output class="filter-hits">155 hits</output>
+        <output id="filter-hits" class="filter-hits">151 hits</output>
         <button id="filter-close-button" class="filter-close-button" onclick="closeMenu(false)">Close</button>
     </fieldset>
 </form>

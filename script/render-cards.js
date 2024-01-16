@@ -14,14 +14,87 @@ function getElement(id) {
 function fillPokecardCollector(pokecardCollector) {
     for (let i = 0; i < pokedex.length; i++) {
         pokecardCollector.innerHTML += `
-            ${searchOrRenderPokecard(i)}
+            ${searchFilterRenderPokecard(i)}
         `;
     }
 }
 
 
-function searchOrRenderPokecard(i) {
-    return (searchPokemon) ? searchPokecard(i) : renderPokecard(i);
+function searchFilterRenderPokecard(i) {
+    return (searchPokemon) ? searchPokecard(i) : filterRenderPokecard(i);
+}
+
+
+function filterRenderPokecard(i) {
+    let filter = getJsonObjectValue(filterPokemon, 'types').length > 0;
+    return (filter) ? filterOnlyPureOrByFirst(i) : renderPokecard(i);
+}
+
+
+function filterOnlyPureOrByFirst(i) {
+    let onlyPure = getJsonObjectValue(filterPokemon, 'only-pure');
+    return (onlyPure) ? filterPokecardOnlyPure(i) : filterByFirstOrDefault(i);
+}
+
+
+function filterPokecardOnlyPure(i) {
+    let filter = getJsonObjectValue(filterPokemon, 'types');
+    let types = getPokedexObjectValue(i, 'main', 'types');
+    let pure = types.length < 2;
+    if (pure) {
+        let type = types[0];
+        let match = false;
+        for (let f = 0; f < filter.length; f++) {
+            match = type == filter[f];
+            if (match) {
+                break;
+            }
+        }
+        return (match) ? renderPokecard(i) : '';
+    } else {
+        return '';
+    }
+}
+
+
+function filterByFirstOrDefault(i) {
+    let byFirst = getJsonObjectValue(filterPokemon, 'by-first');
+    return (byFirst) ? filterPokecardByFirst(i) : filterPokecard(i);
+}
+
+
+function filterPokecardByFirst(i) {
+    let filter = getJsonObjectValue(filterPokemon, 'types');
+    let types = getPokedexObjectValue(i, 'main', 'types');
+    let type = types[0];
+    let match = false;
+    for (let f = 0; f < filter.length; f++) {
+        match = type == filter[f];
+        if (match) {
+            break;
+        }
+    }
+    return (match) ? renderPokecard(i) : '';
+}
+
+
+function filterPokecard(i) {
+    let filter = getJsonObjectValue(filterPokemon, 'types');
+    let types = getPokedexObjectValue(i, 'main', 'types');
+    let match = false;
+    for (let t = 0; t < types.length; t++) {
+        let type = types[t];
+        for (let f = 0; f < filter.length; f++) {
+            match = type == filter[f];
+            if (match) {
+                break;
+            }
+        }
+        if (match) {
+            break;
+        }
+    }
+    return (match) ? renderPokecard(i) : '';
 }
 
 
@@ -253,14 +326,25 @@ function toggleMenuButtonGroup(search) {
 }
 
 
-function includeMenuSearch() {
+async function includeMenuSearch() {
     setElementAttribute('header-menu-button', 'onclick', 'closeMenu(true)');
     setElementAttribute('pokedex-menu-content', 'include-menu-content', fileSearch);
-    includeHTML('include-menu-content');
+    await includeHTML('include-menu-content');
     setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
     setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
     setButtonDisabled('search-button', true);
     setButtonDisabled('filter-button', false);
+    setFilterSettings();
+}
+
+
+function setFilterSettings() {
+    filterPokemon = {
+        'enabled': false,
+        'types': [],
+        'by-first': false,
+        'only-pure': false
+    };
 }
 
 
