@@ -253,13 +253,14 @@ function setButtonDisabled(id, logical) {
 }
 
 
-function includeMenuFilter() {
+async function includeMenuFilter() {
     setElementAttribute('pokedex-menu-content', 'include-menu-content', filefilter);
-    includeHTML('include-menu-content');
+    await includeHTML('include-menu-content');
     setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
     setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
     setButtonDisabled('search-button', false);
     setButtonDisabled('filter-button', true);
+    renderFilterTypeGroup();
 }
 
 
