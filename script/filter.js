@@ -1,10 +1,5 @@
 // Variables
-let searchPokemon = [
-    {
-        'enabled': false,
-        'hits': 0
-    }
-];
+let searchPokemon = false;
 
 
 let filterPokemon = {
@@ -23,6 +18,83 @@ let filterTypeGroup = [
 
 
 // render menu + render search and filter content
+
+
+function verifySearchValue() {    // Please edit search functions!!!
+    resetHits();
+    let input = getElementValue('search-input');
+    let enabled = input.length > 0;
+    (enabled) ? searchPokemon = true : searchPokemon = false;
+    renderPokecardCollection();
+    showHits();
+}
+
+
+function resetHits() {
+    document.getElementById('search-hits').innerHTML = '';
+}
+
+
+function countHits() {
+    return document.getElementById('pokecard-collector').childElementCount;
+}
+
+
+function showHits() {
+    if (searchPokemon) {
+        let count = countHits();
+        let hits = getElement('search-hits');
+        setHits(count, hits);
+    }
+}
+
+
+function setHits(count, hits) {
+    if (count > 1) {
+        hits.innerHTML = count + ' hits';
+    } else {
+        hits.innerHTML = count + ' hit';
+    }
+}
+
+
+function searchPokecard(i) {
+    let input = document.getElementById('search-input').value;
+    let modus = isNaN(input);
+    return (modus) ? searchPokecardByName(i, input) : searchPokecardById(i, input);
+}
+
+
+function getElementValue(id) {
+    return document.getElementById(id).value;
+}
+
+
+function searchPokecardByName(i, input) {
+    input = input.toLowerCase();
+    let name = getPokedexObjectValue(i, 'main', 'name');
+    let fraction = '';
+    for (let j = 0; j < input.length; j++) {
+        fraction += name[j];
+    }
+    let match = fraction == input;
+    return (match) ? renderPokecard(i) : '';
+}
+
+
+function searchPokecardById(i, input) {
+    input = Number(input);
+    let id = getPokedexObjectValue(i, 'main', 'id');
+    let match = input == id;
+    return (match) ? renderPokecard(i) : '';
+}
+
+
+function closeSearch() {
+    searchPokemon['enabled'] = false;
+    closeMenu(true);
+    return false;
+}
 
 
 function renderFilterTypeGroup() {

@@ -14,9 +14,14 @@ function getElement(id) {
 function fillPokecardCollector(pokecardCollector) {
     for (let i = 0; i < pokedex.length; i++) {
         pokecardCollector.innerHTML += `
-            ${renderPokecard(i)}
+            ${searchOrRenderPokecard(i)}
         `;
     }
+}
+
+
+function searchOrRenderPokecard(i) {
+    return (searchPokemon) ? searchPokecard(i) : renderPokecard(i);
 }
 
 
