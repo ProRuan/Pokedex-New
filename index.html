@@ -27,7 +27,7 @@
 
     <header class="flex-between-center">
         <button id="header-back-button" class="header-button flex-center-center">B</button>
-        <button id="header-menu-button" class="header-button flex-center-center" onclick="openMenu()">M</button>
+        <button id="header-menu-button" class="header-button flex-center-center" onclick="openMenu(false)">M</button>
     </header>
 
     <main>
@@ -38,7 +38,7 @@
     </main>
 
     <aside id="pokedex-menu" class="pokedex-menu">
-        <section id="pokedex-menu-header" class="pokedex-menu-link-group">
+        <section id="pokedex-menu-header" class="pokedex-menu-button-group">
             <button id="search-button" class="pokedex-menu-button" onclick="includeMenuSearch()">Search</button> |
             <button id="filter-button" class="pokedex-menu-button pokedex-menu-button-active" onclick="includeMenuFilter()">Filter</button>
         </section>

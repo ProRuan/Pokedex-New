@@ -230,15 +230,26 @@ function setElementAttribute(id, attribute, value) {
 }
 
 
-function closeMenu() {
+function closeMenu(logical) {
+    toggleMenuButtonGroup(logical);
     setClassOnCommand('pokedex-menu', 'remove', 'pm-opened');
-    setElementAttribute('header-menu-button', 'onclick', 'openMenu()');
+    setElementAttribute('header-menu-button', 'onclick', `openMenu()`);
     let content = getElement('pokedex-menu-content');
     content.innerHTML = '<!-- rendering search bar or filter settings -->';
 }
 
+function toggleMenuButtonGroup(search) {
+    if (search) {
+        setTimeout(() => {
+            setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
+            setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
+        }, 125);
+    }
+}
+
 
 function includeMenuSearch() {
+    setElementAttribute('header-menu-button', 'onclick', 'closeMenu(true)');
     setElementAttribute('pokedex-menu-content', 'include-menu-content', fileSearch);
     includeHTML('include-menu-content');
     setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
@@ -254,6 +265,7 @@ function setButtonDisabled(id, logical) {
 
 
 async function includeMenuFilter() {
+    setElementAttribute('header-menu-button', 'onclick', 'closeMenu(false)');
     setElementAttribute('pokedex-menu-content', 'include-menu-content', filefilter);
     await includeHTML('include-menu-content');
     setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');

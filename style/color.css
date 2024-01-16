@@ -143,74 +143,155 @@
 }
 
 
-.filter-normal {
+
+
+.filter-default {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.filter-normal:hover {
     background-color: #A8A899;
 }
 
-.filter-fire {
+.filter-fire:hover {
     background-color: #E53B19;
 }
 
-.filter-water {
+.filter-water:hover {
     background-color: #278BCC;
 }
 
-.filter-electric {
+.filter-electric:hover {
     background-color: #E5C600;
 }
 
-.filter-grass {
+.filter-grass:hover {
     background-color: #58A951;
 }
 
-.filter-flying {
+.filter-flying:hover {
     background-color: #87B5E5;
 }
 
-.filter-bug {
+.filter-bug:hover {
     background-color: #83AD25;
 }
 
-.filter-poison {
+.filter-poison:hover {
     background-color: #864AB8;
 }
 
-.filter-rock {
+.filter-rock:hover {
     background-color: #A8995B;
 }
 
-.filter-ground {
+.filter-ground:hover {
     background-color: #956833;
 }
 
-.filter-fighting {
+.filter-fighting:hover {
     background-color: #A84C3D;
 }
 
-.filter-ice {
+.filter-ice:hover {
     background-color: #68BAAC;
 }
 
-.filter-psychic {
+.filter-psychic:hover {
     background-color: #E55973;
 }
 
-.filter-ghost {
+.filter-ghost:hover {
     background-color: #633C64;
 }
 
-.filter-dragon {
+.filter-dragon:hover {
     background-color: #4D64AB;
 }
 
-.filter-dark {
+.filter-dark:hover {
     background-color: #463E3E;
 }
 
-.filter-steel {
+.filter-steel:hover {
     background-color: #9999A8;
 }
 
-.filter-fairy {
+.filter-fairy:hover {
+    background-color: #D480CF;
+}
+
+
+
+
+.filter-normal-activated {
+    background-color: #A8A899;
+}
+
+.filter-fire-activated {
+    background-color: #E53B19;
+}
+
+.filter-water-activated {
+    background-color: #278BCC;
+}
+
+.filter-electric-activated {
+    background-color: #E5C600;
+}
+
+.filter-grass-activated {
+    background-color: #58A951;
+}
+
+.filter-flying-activated {
+    background-color: #87B5E5;
+}
+
+.filter-bug-activated {
+    background-color: #83AD25;
+}
+
+.filter-poison-activated {
+    background-color: #864AB8;
+}
+
+.filter-rock-activated {
+    background-color: #A8995B;
+}
+
+.filter-ground-activated {
+    background-color: #956833;
+}
+
+.filter-fighting-activated {
+    background-color: #A84C3D;
+}
+
+.filter-ice-activated {
+    background-color: #68BAAC;
+}
+
+.filter-psychic-activated {
+    background-color: #E55973;
+}
+
+.filter-ghost-activated {
+    background-color: #633C64;
+}
+
+.filter-dragon-activated {
+    background-color: #4D64AB;
+}
+
+.filter-dark-activated {
+    background-color: #463E3E;
+}
+
+.filter-steel-activated {
+    background-color: #9999A8;
+}
+
+.filter-fairy-activated {
     background-color: #D480CF;
 }
