@@ -3,6 +3,7 @@ async function renderCard(i) {
     renderCardMain(i);
     await includeHTML('include-card-info');
     renderCardAbout(i);
+    setCardLinks(i);
 }
 
 
@@ -64,6 +65,11 @@ function renderCardArtwork(i) {
 
 function setImageSource(id, image) {
     document.getElementById(id).src = image;
+}
+
+
+function setCardLinks(i) {
+    setElementAttribute('card-base-stats', 'onclick', `renderCardStats(${i})`);
 }
 
 
@@ -183,9 +189,11 @@ function getFormattedAbilities(i) {
 }
 
 
-function renderCardStats() {
+async function renderCardStats(i) {
     setIncludingAttribute(fileStats)
-    includeHTML('include-card-info');
+    await includeHTML('include-card-info');
+    renderStatsValueCollector(i);
+    renderCardStatsValues(i);
 }
 
 
@@ -195,5 +203,80 @@ function setIncludingAttribute(file) {
 }
 
 
-// stats values in relation or fixed table width
-// search, filter, render in render-cards.js
+function renderCardStatsValues(i) {
+    let keys = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed', 'total'];
+    for (let j = 0; j < keys.length; j++) {
+        let key = keys[j];
+        let stat = getPokedexObjectValue(i, 'base-stats', key);
+        outputValue(`td-${key}`, stat);
+    }
+}
+
+
+function renderStatsValueCollector(i) {
+    let content = getElement('stats-value-collector');
+    content.innerHTML = '';
+    renderStatsValueGroup(i, content);
+    renderStatsValueTotal(i, content);
+    setValueBarColor(i);
+    setValueBarColorTotal(i);
+}
+
+
+function renderStatsValueGroup(i, content) {
+    let keys = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];
+    for (let j = 0; j < keys.length; j++) {
+        let key = keys[j];
+        let stat = getScaledStat(i, key, 160);
+        content.innerHTML += renderStatsValue(key, stat);
+    }
+}
+
+
+function getScaledStat(i, key, max) {
+    let statUnscaled = getPokedexObjectValue(i, 'base-stats', key);
+    let maxWidth = getElement(`${key}-max-bar`).offsetWidth;
+    let stat = statUnscaled / max * maxWidth;
+    return (stat > 100) ? 100 : stat;
+}
+
+
+function renderStatsValue(key, stat) {    // Bitte umbennenen!!!
+    return `
+        .${key} {
+            width: ${stat}px;
+        }
+    `;
+}
+
+
+function renderStatsValueTotal(i, content) {
+    let total = getScaledStat(i, 'total', 720);
+    content.innerHTML += renderStatsValue('total', total);
+}
+
+
+function setValueBarColor(i) {
+    let keys = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];
+    for (let k = 0; k < keys.length; k++) {
+        let key = keys[k]
+        let stat = getPokedexObjectValue(i, 'base-stats', key);
+        let color = getValueBarColor(stat, 50);
+        setClassOnCommand(`${key}-bar`, 'add', color);
+    }
+}
+
+
+function getValueBarColor(stat, max) {
+    return (stat < max) ? 'bgc-red' : 'bgc-green';
+}
+
+
+function setValueBarColorTotal(i) {
+    let total = getPokedexObjectValue(i, 'base-stats', 'total');
+    let color = getValueBarColor(total, 300);
+    setClassOnCommand('total-bar', 'add', color);
+}
+
+
+// render info-link-underline!!!

@@ -132,11 +132,18 @@ dialog[open] {
 }
 
 .value-bar {
-    width: 45px;
     height: 4px;
-    background-color: #88B69F;
+    /* background-color: #88B69F; */
     /* background-color: #D4A6A6; */
     border-radius: 4px;
+}
+
+.bgc-green {
+    background-color: #88B69F;
+}
+
+.bgc-red {
+    background-color: #D4A6A6;
 }
 
 .evolution-family {

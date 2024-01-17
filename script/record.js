@@ -25,7 +25,8 @@ function recordMain(i) {    // records the main of pokemon i
         'id': getPokemonObjectValue(i, 'id'),
         'name': getPokemonObjectValue(i, 'name'),
         'types': getDataset(i, 'types', 'type'),
-        'image': getImage(i)
+        // 'image': getImage(i)
+        'image': null
     };
     return main;
 }
@@ -78,7 +79,8 @@ function recordBaseStat(i) {    // records the base stats of pokemon i
         'defense': getBaseStat(i, 2),
         'special-attack': getBaseStat(i, 3),
         'special-defense': getBaseStat(i, 4),
-        'speed': getBaseStat(i, 5)
+        'speed': getBaseStat(i, 5),
+        'total': getBaseStatTotal(i)
     }
     return baseStats;
 }
@@ -88,6 +90,16 @@ function getBaseStat(i, j) {    // provides a base stat of pokemon i by j
     let stats = getPokemonObjectValue(i, 'stats');
     let keys = [j, 'base_stat'];
     return getJsonObjectDeepValue(stats, keys);
+}
+
+
+function getBaseStatTotal(i) {
+    let total = 0;
+    for (let j = 0; j < 6; j++) {
+        let stat = getBaseStat(i, j);
+        total += stat;
+    }
+    return total;
 }
 
 
