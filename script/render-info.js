@@ -335,7 +335,96 @@ function renderEvolutionMember(j, member) {
 async function renderCardMoves(i) {
     setIncludingAttribute(fileMoves);
     await includeHTML('include-card-info');
-    
+    // add function()
+
+    renderMoves(i);
+}
+// update moves.html!!!
+
+
+function renderMoves(i) {
+    let content = getElement('tb-moves');
+    content.innerHTML = '';
+    // renderMovesTableRow(i, content);
+    fillTableMoves(i, content);
+    // content.innerHTML = 'table moves';
 }
 
+
+function fillTableMoves(i, content) {
+    let [levels, names, methods] = getLevelsNamesMethods(i);
+    [levels, names, methods] = sortByLevel(levels, names, methods);
+
+    // for (let j = 0; j < levels.length; j++) {
+    //     content.innerHTML += 'in Arbeit';
+    // }
+
+
+    for (let k = 0; k < methods.length; k++) {
+        let method = methods[k];
+        let byLevelUp = method == 'level-up';
+        if (byLevelUp) {
+            // let name = names[k];
+            let nameUnformatted = names[k];
+            let name = getFormattedInlineNames(nameUnformatted);
+            let level = levels[k];
+
+            let moveData = `
+            <tr>
+                <th id="th-level-${k}" class="th-moves">${level}</th>
+                <td id="td-name-${k}" class="td-moves">${name}</td>
+            </tr>
+        `;
+            content.innerHTML += moveData;
+        }
+    }
+}
+// render yellow???
+
+
+function getLevelsNamesMethods(i) {
+    let keys = [i, 'moves', 'red-blue', 'levels'];
+    let levels = getJsonObjectDeepValue(pokedex, keys);
+    keys = [i, 'moves', 'red-blue', 'names'];
+    let names = getJsonObjectDeepValue(pokedex, keys);
+    keys = [i, 'moves', 'red-blue', 'methods'];
+    let methods = getJsonObjectDeepValue(pokedex, keys);
+    return [levels, names, methods];
+}
+
+
+function sortByLevel(levels, namesUnsorted, methodsUnsorted) {
+    let copy = [];
+    for (let c = 0; c < levels.length; c++) {
+        let level = levels[c];
+        copy.push(level);
+    }
+
+    levels = [];
+    let names = [];
+    let methods = [];
+
+    for (let k = 0; k < copy.length; k++) {
+        let min = 100;
+        let index = -1;
+        let name = 'n';
+        let method = 'm';
+        for (let j = 0; j < copy.length; j++) {
+            let level = copy[j];
+            if (level < min && level > -1) {
+                min = level;
+                name = namesUnsorted[j];
+                method = methodsUnsorted[j];
+                index = j;
+            }
+        }
+        levels.push(min);
+        names.push(name);
+        methods.push(method);
+        copy[index] = -1;
+    }
+    return [levels, names, methods];
+    // alert(levels);
+}
+// levels and levelsUnsorted!!!
 
