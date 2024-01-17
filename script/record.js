@@ -25,8 +25,7 @@ function recordMain(i) {    // records the main of pokemon i
         'id': getPokemonObjectValue(i, 'id'),
         'name': getPokemonObjectValue(i, 'name'),
         'types': getDataset(i, 'types', 'type'),
-        // 'image': getImage(i)
-        'image': null
+        'image': getArtwork(i)
     };
     return main;
 }
@@ -49,7 +48,7 @@ function getDataset(i, key, subkey) {    // provides a dataset of pokemon i
 }
 
 
-function getImage(i) {    // provides an image of pokemon i
+function getArtwork(i) {    // provides an image of pokemon i
     let sprites = getPokemonObjectValue(i, 'sprites');
     let keys = ['other', 'official-artwork', 'front_default'];
     return getJsonObjectDeepValue(sprites, keys);
