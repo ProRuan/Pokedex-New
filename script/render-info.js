@@ -1,8 +1,9 @@
 async function renderCard(i) {
     setCardColor(i);
     renderCardMain(i);
-    await includeHTML('include-card-info');
     renderCardAbout(i);
+    // await includeHTML('include-card-info');
+    // renderCardAbout(i);
     setCardLinks(i);
 }
 
@@ -68,17 +69,28 @@ function setImageSource(id, image) {
 }
 
 
-function setCardLinks(i) {
-    setElementAttribute('card-base-stats', 'onclick', `renderCardStats(${i})`);
+async function renderCardAbout(i) {
+    setIncludingAttribute(fileAbout);
+    await includeHTML('include-card-info');
+    renderCardAboutValues(i);
 }
 
 
-function renderCardAbout(i) {
+function setCardLinks(i) {
+    setElementAttribute('card-about', 'onclick', `renderCardAbout(${i})`);
+    setElementAttribute('card-base-stats', 'onclick', `renderCardStats(${i})`);
+    setElementAttribute('card-evolution', 'onclick', `renderCardEvolution(${i})`);
+    setElementAttribute('card-moves', 'onclick', `renderCardMoves(${i})`);
+}
+
+
+function renderCardAboutValues(i) {
     renderInfoSpecies(i);
     renderInfoHeight(i);
     renderInfoWeight(i);
     renderInfoAbilities(i);
 }
+
 
 // Bitte folgende Funktionen updaten
 function renderInfoSpecies(i) {
@@ -199,7 +211,7 @@ async function renderCardStats(i) {
 
 function setIncludingAttribute(file) {
     let content = getElement('card-info-content');
-    content.setAttribute('include-card-info', fileStats);
+    content.setAttribute('include-card-info', file);
 }
 
 
@@ -237,7 +249,7 @@ function getScaledStat(i, key, max) {
     let statUnscaled = getPokedexObjectValue(i, 'base-stats', key);
     let maxWidth = getElement(`${key}-max-bar`).offsetWidth;
     let stat = statUnscaled / max * maxWidth;
-    return (stat > 100) ? 100 : stat;
+    return (stat > maxWidth) ? maxWidth : stat;
 }
 
 
@@ -279,4 +291,51 @@ function setValueBarColorTotal(i) {
 }
 
 
+async function renderCardEvolution(i) {
+    setIncludingAttribute(fileEvolution);
+    await includeHTML('include-card-info');
+    renderEvolutionFamily(i);
+}
+
+
+function renderEvolutionFamily(i) {    // think about the names of subsequent funcitons!!!
+    let content = getElement('evolution-family');
+    content.innerHTML = '';
+    fillEvolutionFamily(i, content);
+}
+
+
+function fillEvolutionFamily(i, content) {
+    let family = pokedex[i]['evolution'];
+    let max = family.length;
+    for (let j = 0; j < max; j++) {
+        let member = family[j];
+        content.innerHTML += renderEvolutionMember(j, member);
+    }
+}
+
+
+// class evolution-member text links - bild rechts!!!
+function renderEvolutionMember(j, member) {
+    let image = getImage(member);
+    let name = getFormattedName(member);
+    let id = getFormattedId(member);
+    return `
+        <div id="evolution-member-${j}">
+            <img class="evolution-artwork" src="${image}" alt="${name}">
+            <div class="evolution-subtext">${id} ${name}</div>
+        </div>
+    `;
+}
+
+
 // render info-link-underline!!!
+
+
+async function renderCardMoves(i) {
+    setIncludingAttribute(fileMoves);
+    await includeHTML('include-card-info');
+    
+}
+
+

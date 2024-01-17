@@ -88,6 +88,10 @@ dialog[open] {
     line-height: 12px;
 }
 
+.c-pointer {
+    cursor: pointer;
+}
+
 .link-active {
     padding-bottom: 16px;
     border-bottom: 2px solid mediumblue;
