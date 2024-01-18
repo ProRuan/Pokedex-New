@@ -16,10 +16,6 @@
     width: 0;
     height: calc(100vh - 72px);
     background-color: white;
-    /* position: fixed;
-    top: 72px;
-    right: 0;
-    z-index: 100; */
     transition: 125ms width ease-in-out;
     overflow-x: hidden;
 }
@@ -38,8 +34,14 @@
     align-items: center;
 }
 
+.pm-close-button {
+    background-image: url('../img/close.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .pokedex-menu-button-group {
-    padding: 0 24px;
+    padding: 16px 24px 0 24px;
     font-size: 16px;
     font-weight: bold;
     line-height: 20px;
@@ -179,9 +181,6 @@
 .filter-close-button:active {
     background-color: rgba(0, 0, 0, 0.3);
 }
-
-/* Padding sollte nicht vom body kommen!!! */
-
 
 .display-none {
     display: none;

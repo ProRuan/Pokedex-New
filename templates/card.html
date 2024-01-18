@@ -3,6 +3,7 @@
         <button class="header-button hb-back flex-center-center white" onclick="closeDialog()"></button>
         <button class="header-button hb-like flex-center-center white display-none"></button>
     </div>
+
     <article id="card-header" class="card-header">
         <h1 id="card-name" class="card-title">Bulbasaur</h1>
         <div id="card-id" class="card-id ta-right">#001</div>
@@ -15,6 +16,7 @@
                 alt="pokemon">
         </div>
     </article>
+
     <article id="card-info" class="card-info">
         <nav id="card-info-bar" class="card-info-bar flex-between-center">
             <a id="card-about" class="c-pointer link-active" onclick="renderCardAbout(0)">About</a>
@@ -25,4 +27,5 @@
         <div id="card-info-content" class="card-info-content" include-card-info="./templates/about.html">
             <!-- rendering about, base stats, evolution or moves -->
         </div>
+    </article>
 </section>

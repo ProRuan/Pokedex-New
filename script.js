@@ -25,28 +25,17 @@ async function includeHTML() {
 // openDialog() + includeHTML() + renderValues()
 // format output: e.g. Seed (without pokemon)
 
-// Calculate Total there!!!
-// Put Moves in order there!!!
-
-
-// Tasks
-// -----
-// II. Render TypeColor (HTML)
-// I. Calculate Total (JavaScript)
-
 
 // Options
 // -------
 // About: breeding details
 // Evolution:  evolution chain
 // moves: other versions
+// like button + filter liked pokemon
 
 
 // Clean Coding
 // ------------
 // think about function names
 // think about save and load
-// use i instead of index
-// use MASTERKEY()
-
 // remove save and load of kantodex???

@@ -4,13 +4,13 @@ html {
 
 body {
     margin: 0;
-    padding: 40px 24px 32px 24px;
-    height: calc(100vh - 72px);
     font-family: 'Open Sans', sans-serif;
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-/* height passt nicht!!! */
+.header {
+    padding: 40px 24px 0 24px;
+}
 
 .flex-between-center {
     display: flex;
@@ -25,12 +25,11 @@ button {
 .header-button {
     width: 32px;
     height: 32px;
-    font-family: 'Open Sans', 'Gill Sans', 'Gill Sans MT', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     font-weight: bold;
     line-height: 20px;
     color: #7986DF;
-    /* background-color: transparent; */
     background-color: rgba(0, 0, 0, 0.05);
     border: unset;
     border-radius: 50%;
@@ -54,6 +53,10 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.pokedex-main {
+    padding: 0 24px 32px 24px;
 }
 
 .pokedex-headline {
@@ -82,12 +85,16 @@ button {
 
 .pokecard {
     padding: 16px;
-    /* width: calc(100% - 32px); */
     width: 223px;
     height: 160px;
     color: white;
     border-radius: 20px;
     position: relative;
+    cursor: pointer;
+}
+
+.pokecard:hover {
+    filter: brightness(0.9);
 }
 
 .pokecard-id {
