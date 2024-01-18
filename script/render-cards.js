@@ -1,43 +1,38 @@
 // Functions
-function renderPokecardCollection() {
-    pokecardCollector = getElement('pokecard-collector');
-    pokecardCollector.innerHTML = '';
+function renderPokecardCollection() {    // renders the pokecards
+    pokecardCollector = getElement('pokecard-collector');    // element 'pokecard-collector'
+    pokecardCollector.innerHTML = '';    // empties pokecardCollector
     fillPokecardCollector(pokecardCollector);
 }
 
 
-function getElement(id) {
-    return document.getElementById(id);
-}
-
-
-function fillPokecardCollector(pokecardCollector) {
-    for (let i = 0; i < pokedex.length; i++) {
+function fillPokecardCollector(pokecardCollector) {    // fills the pokecardCollector
+    for (let i = 0; i < pokedex.length; i++) {    // 151 pokecards
         pokecardCollector.innerHTML += `
-            ${searchFilterRenderPokecard(i)}
+            ${searchFilterPokecard(i)}
         `;
     }
 }
 
 
-function searchFilterRenderPokecard(i) {
+function searchFilterPokecard(i) {    // searches or filters pokecard i
     return (searchPokemon) ? searchPokecard(i) : filterRenderPokecard(i);
 }
 
 
-function filterRenderPokecard(i) {
-    let filter = getJsonObjectValue(filterPokemon, 'types').length > 0;
+function filterRenderPokecard(i) {    // filters or renders pokecard i
+    let filter = getJsonObjectValue(filterPokemon, 'types').length > 0;    // true or false
     return (filter) ? filterOnlyPureOrByFirst(i) : renderPokecard(i);
 }
 
 
-function filterOnlyPureOrByFirst(i) {
-    let onlyPure = getJsonObjectValue(filterPokemon, 'only-pure');
+function filterOnlyPureOrByFirst(i) {    // filters pokecard i by pure type or first type
+    let onlyPure = getJsonObjectValue(filterPokemon, 'only-pure');    // true or false
     return (onlyPure) ? filterPokecardOnlyPure(i) : filterByFirstOrDefault(i);
 }
 
 
-function filterPokecardOnlyPure(i) {
+function filterPokecardOnlyPure(i) {    // Bitte bearbeiten!!!
     let filter = getJsonObjectValue(filterPokemon, 'types');
     let types = getPokedexObjectValue(i, 'main', 'types');
     let pure = types.length < 2;
@@ -57,13 +52,13 @@ function filterPokecardOnlyPure(i) {
 }
 
 
-function filterByFirstOrDefault(i) {
-    let byFirst = getJsonObjectValue(filterPokemon, 'by-first');
+function filterByFirstOrDefault(i) {    // filters pokecard i by first type or without any additional condition
+    let byFirst = getJsonObjectValue(filterPokemon, 'by-first');    // true or false
     return (byFirst) ? filterPokecardByFirst(i) : filterPokecard(i);
 }
 
 
-function filterPokecardByFirst(i) {
+function filterPokecardByFirst(i) {    // Bitte bearbeiten!!!
     let filter = getJsonObjectValue(filterPokemon, 'types');
     let types = getPokedexObjectValue(i, 'main', 'types');
     let type = types[0];
@@ -78,7 +73,7 @@ function filterPokecardByFirst(i) {
 }
 
 
-function filterPokecard(i) {
+function filterPokecard(i) {    // Bitte bearbeiten!!!
     let filter = getJsonObjectValue(filterPokemon, 'types');
     let types = getPokedexObjectValue(i, 'main', 'types');
     let match = false;
@@ -98,8 +93,8 @@ function filterPokecard(i) {
 }
 
 
-function renderPokecard(i) {
-    let color = getColor(i, 0);
+function renderPokecard(i) {    // renders the pokecard i
+    let color = getColor(i, 0);    // class name of background color
     return `
         <article id="pokecard-${i}" class="pokecard ${color} flex-column gap-12" onclick="showCard(${i})">
             ${writePokecardIdName(i)}
@@ -110,13 +105,13 @@ function renderPokecard(i) {
 }
 
 
-function getColor(i, j) {
+function getColor(i, j) {    // provides the type of pokecard i
     let types = getPokedexObjectValue(i, 'main', 'types');
-    return types[j];
+    return types[j];    // first type's name is equal to same-named class
 }
 
 
-function writePokecardIdName(i) {
+function writePokecardIdName(i) {    // writes id and name of pokecard i
     return `
         <div id="pokecard-id-name-${i}">
             ${writePokecardId(i)}
@@ -126,290 +121,124 @@ function writePokecardIdName(i) {
 }
 
 
-function writePokecardId(i) {
+function writePokecardId(i) {    // writes the id of pokecard i
     let id = getFormattedId(i);
     return `<div id="pokecard-id-${i}" class="pokecard-id ta-right">${id}</div>`;
 }
 
 
-function getFormattedId(i) {
-    let idUnformatted = getPokedexObjectValue(i, 'main', 'id');
-    let id = formatId(idUnformatted);
+function getFormattedId(i) {    // provides the formatted id of pokecard i
+    let idUnformatted = getPokedexObjectValue(i, 'main', 'id');    // id as number
+    let id = formatId(idUnformatted);    // id as formatted String
     return id;
 }
 
 
-function getPokedexObjectValue(index, key, subkey) {
+function getPokedexObjectValue(index, key, subkey) {    // provides a value of the pokedex by index, key and subkey
     return pokedex[index][key][subkey];
 }
 
 
-function formatId(id) {
+function formatId(id) {    // formats the id
     return ((id > 99) ? '#' : (id > 9) ? '#0' : '#00') + id;
 }
 
 
-function writePokecardName(i) {
-    let name = getFormattedNameFemale(i);
+function writePokecardName(i) {    // writes the name of pokecard i
+    let name = getFormattedNameFemale(i);    // formatted name of pokecard i
     return `<h3 id="pokecard-name-${i}" class="pokecard-name">${name}</h3>`
 }
 
 
-function getFormattedNameFemale(i) {
+function getFormattedNameFemale(i) {    // provides the formatted name of 'nidoran-f'
     let name = getPokedexObjectValue(i, 'main', 'name');
     let match = name == 'nidoran-f';
     return (match) ? 'Nidoran&#9792' : getFormattedNameMale(i);
 }
 
 
-function getFormattedNameMale(i) {
+function getFormattedNameMale(i) {    // provides the formatted name of 'nidoran-m'
     let name = getPokedexObjectValue(i, 'main', 'name');
     let match = name == 'nidoran-m';
     return (match) ? 'Nidoran&#9794' : getFormattedNameD(i);
 }
 
 
-function getFormattedNameD(i) {
+function getFormattedNameD(i) {    // provides the formatted name of 'farfetchd'
     let name = getPokedexObjectValue(i, 'main', 'name');
     let match = name == 'farfetchd';
     return (match) ? 'Farfetch\'d' : getFormattedNameMr(i);
 }
 
 
-function getFormattedNameMr(i) {
+function getFormattedNameMr(i) {    // // provides the formatted name of 'mr-mime'
     let name = getPokedexObjectValue(i, 'main', 'name');
     let match = name == 'mr-mime';
     return (match) ? 'Mr. Mime' : getFormattedName(i);
 }
 
 
-function getFormattedName(i) {
-    let nameUnformatted = getPokedexObjectValue(i, 'main', 'name');
-    let name = formatFirstLetter(nameUnformatted)
+function getFormattedName(i) {    // provides the formatted name of pokecard i
+    let nameUnformatted = getPokedexObjectValue(i, 'main', 'name');    // unformatted name
+    let name = formatFirstLetter(nameUnformatted);    // name with capital
     return name;
 }
 
 
-function formatFirstLetter(name) {
-    let first = name[0];
-    let capital = first.toUpperCase();
-    return name.replace(first, capital);
+function formatFirstLetter(name) {    // formats the first letter of a name to a capital
+    let first = name[0];    // first letter
+    let capital = first.toUpperCase();    // capital 
+    return name.replace(first, capital);    // name with capital
 }
 
 
-function writePokecardTypeGroup(i) {
+function writePokecardTypeGroup(i) {    // writes the type group of pokecard i
     return `
         <div id="pokecard-type-group-${i}" class="flex-column gap-8">
-            ${writePokecardTypes(i)}
+            ${writeFormattedTypeGroup(i)}
         </div>
     `;
 }
 
 
-function writePokecardTypes(i) {
+function writeFormattedTypeGroup(i) {    // writes the formatted type group of pokecard i
     let typeGroup = '';
-    typeGroup = getFormattedTypes(i, typeGroup);
-    return typeGroup;
-}
-
-
-function getFormattedTypes(i, typeGroup) {
-    let types = getPokedexObjectValue(i, 'main', 'types');
+    let types = getPokedexObjectValue(i, 'main', 'types');    // types of pokecard i
     for (let j = 0; j < types.length; j++) {
-        typeGroup += writePokecardType(i, j);
+        typeGroup += writePokecardType(i, j);    // adds type j
     }
     return typeGroup;
 }
 
 
-function writePokecardType(i, j) {
-    let slot = getSlot(j);
-    let color = getColor(i, j);
-    let type = getFormattedType(i, j);
+function writePokecardType(i, j) {    // writes a type of pokecard i
+    let slot = getSlot(j);    // type one or two
+    let color = getColor(i, j);    // part of class name of background color
+    let type = getFormattedType(i, j);    // type with capital
     return `<div id="pokecard-type-${slot}-${i}" class="pokecard-type type-${color}">${type}</div>`;
 }
 
 
-function getSlot(j) {
+function getSlot(j) {    // provides slot one or two by index
     return (j > 0) ? 'two' : 'one';
 }
 
 
-function getFormattedType(i, j) {
-    let types = getPokedexObjectValue(i, 'main', 'types');
-    let typeUnformatted = types[j];
-    let type = formatFirstLetter(typeUnformatted);
+function getFormattedType(i, j) {    // provides the formatted type j
+    let types = getPokedexObjectValue(i, 'main', 'types');    // types of pokecard i
+    let typeUnformatted = types[j];    // type j
+    let type = formatFirstLetter(typeUnformatted);    // type j with capital
     return type;
 }
 
 
-function writePokecardImage(i) {
-    let image = getImage(i);
-    let name = getPokedexObjectValue(i, 'main', 'name');
+function writePokecardImage(i) {    // writes the image of pokecard i
+    let image = getImage(i);    // artwork of pokecard i
+    let name = getPokedexObjectValue(i, 'main', 'name');    // name of pokecard i
     return `<img id="pokecard-artwork-${i}" class="artwork" src="${image}" alt="${name}">`;
 }
 
 
-function getImage(i) {
+function getImage(i) {    // provides the artwork of pokecard i
     return getPokedexObjectValue(i, 'main', 'image');
 }
-
-
-// move to another script???
-async function showCard(i) {
-    openDialog();
-    await includeHTML('include-card');
-    renderCard(i);
-}
-
-
-function openDialog() {
-    document.getElementById('dialog').show();
-}
-
-
-function stop(event) {
-    event.stopPropagation();
-}
-
-
-function closeDialog() {
-    document.getElementById('dialog').close();
-}
-
-
-async function includeHTML(attribute) {
-    let inclusion = document.querySelectorAll(`[${attribute}]`);    // check
-    for (let i = 0; i < inclusion.length; i++) {
-        const element = inclusion[i];
-        file = element.getAttribute(attribute);    // check
-        let response = await fetch(file);
-        if (response.ok) {
-            element.innerHTML = await response.text();
-        } else {
-            element.innerHTML = 'Page not found.';
-        }
-    }
-}
-
-
-// Funktionen verschieben???
-
-
-function openMenu() {
-    setClassOnCommand('pokedex-menu-background', 'remove', 'display-none');
-
-    setClassOnCommand('pokedex-menu', 'add', 'pm-opened');
-    setElementAttribute('header-menu-button', 'onclick', 'closeMenu()');    // notwendig?
-    includeMenuSearch();
-}
-
-
-function setElementAttribute(id, attribute, value) {
-    document.getElementById(id).setAttribute(attribute, value);
-}
-
-
-function closeMenu(logical) {
-    toggleMenuButtonGroup(logical);
-    setClassOnCommand('pokedex-menu', 'remove', 'pm-opened');
-
-    setClassOnCommand('pokedex-menu-background', 'add', 'display-none');
-    
-    setElementAttribute('header-menu-button', 'onclick', `openMenu()`);
-    let content = getElement('pokedex-menu-content');
-    content.innerHTML = '<!-- rendering search bar or filter settings -->';
-}
-
-function toggleMenuButtonGroup(search) {
-    if (search) {
-        setTimeout(() => {
-            setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
-            setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
-        }, 125);
-    }
-}
-
-
-async function includeMenuSearch() {
-    // setElementAttribute('header-menu-button', 'onclick', 'closeMenu(true)');
-    setElementAttribute('pokedex-menu-close-button', 'onclick', 'closeMenu(true)');
-    setElementAttribute('pokedex-menu-background', 'onclick', 'closeMenu(true)');
-
-    setElementAttribute('pokedex-menu-content', 'include-menu-content', fileSearch);
-    await includeHTML('include-menu-content');
-    setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
-    setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
-    setButtonDisabled('search-button', true);
-    setButtonDisabled('filter-button', false);
-    setFilterSettings();
-}
-
-
-function setFilterSettings() {
-    filterPokemon = {
-        'enabled': false,
-        'types': [],
-        'by-first': false,
-        'only-pure': false
-    };
-}
-
-
-function setButtonDisabled(id, logical) {
-    document.getElementById(id).disabled = logical;
-}
-
-
-async function includeMenuFilter() {
-    // setElementAttribute('header-menu-button', 'onclick', 'closeMenu(false)');
-    setElementAttribute('pokedex-menu-close-button', 'onclick', 'closeMenu(false)');
-    setElementAttribute('pokedex-menu-background', 'onclick', 'closeMenu(false)');
-
-    setElementAttribute('pokedex-menu-content', 'include-menu-content', filefilter);
-    await includeHTML('include-menu-content');
-    setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
-    setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
-    setButtonDisabled('search-button', false);
-    setButtonDisabled('filter-button', true);
-    renderFilterTypeGroup();
-}
-
-
-function setClassOnCommand(id, command, className) {
-    let toggling = command == 'toggle';
-    (toggling) ? toggleClass(id, className) : addOrRemoveClass(id, command, className);
-}
-
-
-function toggleClass(id, className) {
-    document.getElementById(id).classList.toggle(className);
-}
-
-
-function addOrRemoveClass(id, command, className) {
-    let adding = command == 'add';
-    (adding) ? addClass(id, className) : removeClass(id, className);
-}
-
-
-function addClass(id, className) {
-    document.getElementById(id).classList.add(className);
-}
-
-
-function removeClass(id, className) {
-    document.getElementById(id).classList.remove(className);
-}
-
-
-
-// Kommentare schreiben!!!
-
-// Farbe rendern (on card)
-// zu formatieren: nidoran-f, nidoran-m, porenta, pantimos (on card)
-// Passe card.html an --> einfach kopieren und bearbeiten.
-
-// flex column und/oder flex wrap
-// search function
-// filter fuction

@@ -1,14 +1,25 @@
-async function renderCard(i) {
+async function showCard(i) {    // shows the pokecard i
+    openDialog();
+    await includeHTML('include-card');
+    renderCardValues(i);
+}
+
+
+async function renderCardValues(i) {    // renders the values of card i
     setCardColor(i);
     renderCardMain(i);
     renderCardAbout(i);
-    // await includeHTML('include-card-info');
-    // renderCardAbout(i);
     setCardLinks(i);
 }
 
 
-function renderCardMain(i) {
+function setCardColor(i) {    // sets the background color of card i
+    let color = getColor(i, 0);    // class name of background color
+    replaceClasses('card', 'grass', color);
+}
+
+
+function renderCardMain(i) {    // renders the main content of card i
     renderCardName(i);
     renderCardId(i);
     renderCardTypeGroup(i);
@@ -16,60 +27,47 @@ function renderCardMain(i) {
 }
 
 
-function setCardColor(i) {
-    let color = getColor(i, 0);
-    let card = getElement('card');
-    card.classList.replace('grass', color);
-}
-// classOnCommmand + just add (not replace) + css!!!
-
-
-function renderCardName(i) {
-    let name = getFormattedNameFemale(i);
+function renderCardName(i) {    // renders the name of card i
+    let name = getFormattedNameFemale(i);    // formatted name
     outputValue('card-name', name);
 }
 
 
-function outputValue(id, value) {
-    document.getElementById(id).innerHTML = value;
-}
-
-
-function renderCardId(i) {
-    let id = getFormattedId(i);
+function renderCardId(i) {    // renders the id of card i
+    let id = getFormattedId(i);    // formatted id
     outputValue('card-id', id);
 }
 
 
-function renderCardTypeGroup(i) {
-    let types = getPokedexObjectValue(i, 'main', 'types');
+function renderCardTypeGroup(i) {    // renders the type group of card i
+    let types = getPokedexObjectValue(i, 'main', 'types');    // types
     let typeGroup = getElement('card-type-group');
     typeGroup.innerHTML = '';
     for (let j = 0; j < types.length; j++) {
-        renderCardType(i, j, typeGroup);
+        typeGroup.innerHTML += renderCardType(i, j);    // type j
     }
 }
 
 
-function renderCardType(i, j, typeGroup) {
-    let color = getColor(i, j);
-    let type = getFormattedType(i, j);
-    typeGroup.innerHTML += `<div id="card-type-${j}" class="card-type type-${color}">${type}</div>`;
+function renderCardType(i, j) {    // renders the type j of card i
+    let color = getColor(i, j);    // part of class name of background color
+    let type = getFormattedType(i, j);    // type j
+    return `<div id="card-type-${j}" class="card-type type-${color}">${type}</div>`;
 }
 
 
-function renderCardArtwork(i) {
-    let image = getPokedexObjectValue(i, 'main', 'image');
+function renderCardArtwork(i) {    // renders the artwork of card i
+    let image = getPokedexObjectValue(i, 'main', 'image');    // artwork
     setImageSource('card-artwork', image);
 }
 
 
-function setImageSource(id, image) {
+function setImageSource(id, image) {    // set the src of element 'id'
     document.getElementById(id).src = image;
 }
 
 
-async function renderCardAbout(i) {
+async function renderCardAbout(i) {    // Bitte bearbeiten!!!
     setIncludingAttribute(fileAbout);
     await includeHTML('include-card-info');
     renderCardAboutValues(i);

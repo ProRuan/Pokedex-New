@@ -31,8 +31,11 @@ const evolution = [
     false, true, true, false, false,
     false
 ];
+// true if the pokemon i has another evolution member
+// false if the pokemon i is the highest evolution member or a single
 
 
+// file paths --> includeHTML(file)
 const fileAbout = './templates/about.html';
 const fileStats = './templates/stats.html';
 const fileEvolution = './templates/evolution.html';
