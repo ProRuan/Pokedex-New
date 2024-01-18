@@ -332,7 +332,8 @@ function toggleMenuButtonGroup(search) {
 
 
 async function includeMenuSearch() {
-    setElementAttribute('header-menu-button', 'onclick', 'closeMenu(true)');
+    // setElementAttribute('header-menu-button', 'onclick', 'closeMenu(true)');
+    setElementAttribute('pokedex-menu-close-button', 'onclick', 'closeMenu(true)');
     setElementAttribute('pokedex-menu-background', 'onclick', 'closeMenu(true)');
 
     setElementAttribute('pokedex-menu-content', 'include-menu-content', fileSearch);
@@ -361,7 +362,8 @@ function setButtonDisabled(id, logical) {
 
 
 async function includeMenuFilter() {
-    setElementAttribute('header-menu-button', 'onclick', 'closeMenu(false)');
+    // setElementAttribute('header-menu-button', 'onclick', 'closeMenu(false)');
+    setElementAttribute('pokedex-menu-close-button', 'onclick', 'closeMenu(false)');
     setElementAttribute('pokedex-menu-background', 'onclick', 'closeMenu(false)');
 
     setElementAttribute('pokedex-menu-content', 'include-menu-content', filefilter);

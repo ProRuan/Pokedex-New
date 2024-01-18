@@ -5,10 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex App</title>
-
-    <style id="stats-value-collector">
-
-    </style>
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="./style/overview.css">
     <link rel="stylesheet" href="./style/card.css">
@@ -16,6 +13,10 @@
     <link rel="stylesheet" href="./style/menu.css">
     <link rel="stylesheet" href="./media/media-400.css">
     <link rel="stylesheet" href="./media/media-640.css">
+
+    <style id="stats-value-collector">
+
+    </style>
 
     <script src="script.js"></script>
 
@@ -34,7 +35,8 @@
 
     <header class="flex-between-center">
         <button id="header-back-button" class="header-button flex-center-center" onclick="home()">H</button>
-        <button id="header-menu-button" class="header-button flex-center-center hb-menu" onclick="openMenu(false)"></button>
+        <button id="header-menu-button" class="header-button flex-center-center hb-menu"
+            onclick="openMenu(false)"></button>
     </header>
 
     <main>
@@ -46,11 +48,16 @@
 
     <aside id="pokedex-menu-background" class="pokedex-menu-background display-none" onclick="closeMenu(true)">
         <div id="pokedex-menu" class="pokedex-menu" onclick="stop(event)">
+            <div class="pokedex-menu-top-bar flex-end-center">
+                <button id="pokedex-menu-close-button" class="header-button flex-center-center hb-menu" onclick="closeMenu(true)"></button>
+            </div>
             <section id="pokedex-menu-header" class="pokedex-menu-button-group">
                 <button id="search-button" class="pokedex-menu-button" onclick="includeMenuSearch()">Search</button> |
-                <button id="filter-button" class="pokedex-menu-button pokedex-menu-button-active" onclick="includeMenuFilter()">Filter</button>
+                <button id="filter-button" class="pokedex-menu-button pokedex-menu-button-active"
+                    onclick="includeMenuFilter()">Filter</button>
             </section>
-            <section id="pokedex-menu-content" class="pokedex-menu-content" include-menu-content="./templates/search.html">
+            <section id="pokedex-menu-content" class="pokedex-menu-content"
+                include-menu-content="./templates/search.html">
                 <!-- rendering search bar or filter settings -->
             </section>
         </div>
