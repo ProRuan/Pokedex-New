@@ -1,0 +1,63 @@
+@media (min-width: 400px) {
+    .card-title {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    .card-id {
+        font-size: 18px;
+        line-height: 18px;
+    }
+
+    .card-type {
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .card-info-bar {
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .info-table {
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .evolution-subtext {
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .pokedex-menu-button {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .search-title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .search-input {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .search-hits {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .filter-subtitle {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .filter-hits {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+/* buttons designen */

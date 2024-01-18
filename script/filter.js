@@ -220,3 +220,5 @@ function home() {
 
 // filter function zusammenfassen???
 // hits only with output!!!
+
+// filter favorites

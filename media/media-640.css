@@ -1,0 +1,61 @@
+@media (min-width: 640px) {
+    /* .card {
+        width: 400px;
+        height: 90vh;
+        border-radius: 24px;
+    } */
+
+    /* .card-info {
+        min-height: calc(90vh - 324px);
+    } */
+
+
+
+    .card {
+        width: 640px;
+        height: 90vh;
+        border-radius: 24px;
+    }
+
+    .card-title {
+        font-size: 32px;
+        line-height: 32px;
+    }
+
+    .card-id {
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+    .card-type {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .card-info {
+        min-height: calc(90vh - 324px);
+    }
+
+    .card-info-bar {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .info-table {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .evolution-subtext {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .pm-opened {
+        width: 320px;
+        /* border-radius: 24px 0 0 24px; */
+    }
+}
+
+
+/* max-height, overflox-y:scroll, card-info:fit-content */

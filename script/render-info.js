@@ -428,3 +428,8 @@ function sortByLevel(levels, namesUnsorted, methodsUnsorted) {
 }
 // levels and levelsUnsorted!!!
 
+// if id = current leicht einfaerben!!!
+
+// style buttons
+// edit pokedex menu
+// close menu on click beside
