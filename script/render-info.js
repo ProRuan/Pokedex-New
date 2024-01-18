@@ -431,5 +431,3 @@ function sortByLevel(levels, namesUnsorted, methodsUnsorted) {
 // if id = current leicht einfaerben!!!
 
 // style buttons
-// edit pokedex menu
-// close menu on click beside

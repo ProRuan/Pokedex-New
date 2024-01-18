@@ -34,7 +34,7 @@
 
     <header class="flex-between-center">
         <button id="header-back-button" class="header-button flex-center-center" onclick="home()">H</button>
-        <button id="header-menu-button" class="header-button flex-center-center" onclick="openMenu(false)">M</button>
+        <button id="header-menu-button" class="header-button flex-center-center hb-menu" onclick="openMenu(false)"></button>
     </header>
 
     <main>
@@ -44,14 +44,16 @@
         </section>
     </main>
 
-    <aside id="pokedex-menu" class="pokedex-menu">
-        <section id="pokedex-menu-header" class="pokedex-menu-button-group">
-            <button id="search-button" class="pokedex-menu-button" onclick="includeMenuSearch()">Search</button> |
-            <button id="filter-button" class="pokedex-menu-button pokedex-menu-button-active" onclick="includeMenuFilter()">Filter</button>
-        </section>
-        <section id="pokedex-menu-content" class="pokedex-menu-content" include-menu-content="./templates/search.html">
-            <!-- rendering search bar or filter settings -->
-        </section>
+    <aside id="pokedex-menu-background" class="pokedex-menu-background display-none" onclick="closeMenu(true)">
+        <div id="pokedex-menu" class="pokedex-menu" onclick="stop(event)">
+            <section id="pokedex-menu-header" class="pokedex-menu-button-group">
+                <button id="search-button" class="pokedex-menu-button" onclick="includeMenuSearch()">Search</button> |
+                <button id="filter-button" class="pokedex-menu-button pokedex-menu-button-active" onclick="includeMenuFilter()">Filter</button>
+            </section>
+            <section id="pokedex-menu-content" class="pokedex-menu-content" include-menu-content="./templates/search.html">
+                <!-- rendering search bar or filter settings -->
+            </section>
+        </div>
     </aside>
 </body>
 

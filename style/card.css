@@ -44,6 +44,18 @@ dialog[open] {
     color: white;
 }
 
+.hb-back {
+    background-image: url('../img/arrow-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.hb-like {
+    background-image: url('../img/heart-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .card-title {
     margin: 20px 0 0 0;
     font-size: 28px;
