@@ -9,7 +9,7 @@ async function renderCardValues(i) {    // renders the values of card i
     setCardColor(i);
     renderCardMain(i);
     renderCardAbout(i);
-    setCardLinks(i);
+    setCardInfoOnClick(i);
 }
 
 
@@ -62,19 +62,35 @@ function renderCardArtwork(i) {    // renders the artwork of card i
 }
 
 
-function setImageSource(id, image) {    // set the src of element 'id'
+function setImageSource(id, image) {    // sets the src of element 'id'
     document.getElementById(id).src = image;
 }
 
 
-async function renderCardAbout(i) {    // Bitte bearbeiten!!!
+async function renderCardAbout(i) {    // renders the info 'about' of card i
+    highlightInfoLink('card-about');
     setIncludingAttribute(fileAbout);
     await includeHTML('include-card-info');
     renderCardAboutValues(i);
 }
 
 
-function setCardLinks(i) {
+function highlightInfoLink(id) {    // highlights the current info link
+    unhighlightInfoLinks();
+    setClassOnCommand(id, 'add', 'link-active');
+}
+
+
+function unhighlightInfoLinks() {    // unhighlights all info links
+    let ids = ['card-about', 'card-base-stats', 'card-evolution', 'card-moves'];    // info links' ids
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];    // id of info link i
+        setClassOnCommand(id, 'remove', 'link-active');
+    }
+}
+
+
+function setCardInfoOnClick(i) {    // sets the info links' onclick attribute
     setElementAttribute('card-about', 'onclick', `renderCardAbout(${i})`);
     setElementAttribute('card-base-stats', 'onclick', `renderCardStats(${i})`);
     setElementAttribute('card-evolution', 'onclick', `renderCardEvolution(${i})`);
@@ -82,7 +98,7 @@ function setCardLinks(i) {
 }
 
 
-function renderCardAboutValues(i) {
+function renderCardAboutValues(i) {    // renders the info 'about' values of card i
     renderInfoSpecies(i);
     renderInfoHeight(i);
     renderInfoWeight(i);
@@ -90,51 +106,50 @@ function renderCardAboutValues(i) {
 }
 
 
-// Bitte folgende Funktionen updaten
-function renderInfoSpecies(i) {
-    let species = getFormattedSpecies(i);
+function renderInfoSpecies(i) {    // renders the species of card i
+    let species = getFormattedSpecies(i);    // formatted species
     outputValue('info-species', species);
 }
 
 
-function getFormattedSpecies(i) {
+function getFormattedSpecies(i) {    // provides the formatted species of card i
     let speciesUnformatted = getPokedexObjectValue(i, 'about', 'species');
     let species = formatSpecies(speciesUnformatted);
     return species;
 }
 
 
-function formatSpecies(species) {
-    let space = species.indexOf(' ');
-    let copy = species;
-    species = '';
-    for (let i = 0; i < space; i++) {
-        species += copy[i];
+function formatSpecies(species) {    // formats a species without the word 'Pokémon'
+    let overhang = species.indexOf(' Pokémon');    // index of last space
+    let copy = species;    // copy of species
+    species = '';    // empty
+    for (let i = 0; i < overhang; i++) {
+        species += copy[i];    // add letter i
     }
     return species;
 }
 
 
-function renderInfoHeight(i) {
-    let height = getFormattedValue(i, 'height');
+function renderInfoHeight(i) {    // renders the height of card i
+    let height = getFormattedValue(i, 'height');    // height as decimal
     outputValue('info-height', height);
 }
 
 
-function getFormattedValue(i, key) {
-    let valueAsInteger = getPokedexObjectValue(i, 'about', key);
-    let value = valueAsInteger / 10;
+function getFormattedValue(i, key) {    // provides a value as decimal
+    let valueAsInteger = getPokedexObjectValue(i, 'about', key);    // integer
+    let value = valueAsInteger / 10;    // decimal
     return value;
 }
 
 
-function renderInfoWeight(i) {
-    let weight = getFormattedValue(i, 'weight');
+function renderInfoWeight(i) {    // renders the weight of card i
+    let weight = getFormattedValue(i, 'weight');    // weight as decimal
     outputValue('info-weight', weight);
 }
 
 
-function getFormattedInlineNames(name) {
+function getFormattedInlineNames(name) {    // provides formatted inline names
     let renaming = '';
     let initial = true;
     renaming = getRenaming(name, renaming, initial);
@@ -142,64 +157,66 @@ function getFormattedInlineNames(name) {
 }
 
 
-function getRenaming(name, renaming, initial) {
+function getRenaming(name, renaming, initial) {    // provides inline names with capitals
     for (let i = 0; i < name.length; i++) {
-        let letter = name[i];
-        let minus = letter.indexOf('-') > -1;
-        [letter, initial] = formatInitialOrMinus(initial, letter, minus);
-        renaming += letter;
+        let letter = name[i];    // letter i
+        let minus = letter.indexOf('-') > -1;    // true or false
+        [letter, initial] = formatInitialOrMinus(initial, letter, minus);    // letter, true or false
+        renaming += letter;    // adds letter
     }
     return renaming;
 }
 
 
-function formatInitialOrMinus(initial, letter, minus) {
+function formatInitialOrMinus(initial, letter, minus) {    // formats an inital letter or a minus
     return (initial) ? formatInitial(initial, letter) : formatMinusOrReturnLetter(initial, letter, minus);
 }
 
 
-function formatInitial(initial, letter) {
-    letter = letter.toUpperCase();
+function formatInitial(initial, letter) {    // formats an inital letter
+    letter = letter.toUpperCase();    // capital
     initial = false;
     return [letter, initial];
 }
 
 
-function formatMinusOrReturnLetter(initial, letter, minus) {
+function formatMinusOrReturnLetter(initial, letter, minus) {    // formats a minus or returns a letter
     return (minus) ? formatMinus(initial, letter) : letter;
 }
 
 
-function formatMinus(initial, letter) {
-    letter = ' ';
+function formatMinus(initial, letter) {    // formats a minus
+    letter = ' ';    // space
     initial = true;
     return [letter, initial];
 }
 
 
-function renderInfoAbilities(i) {
-    let abilities = getFormattedAbilities(i);
+function renderInfoAbilities(i) {    // renders the abilities of card i
+    let abilities = getFormattedAbilities(i);    // abilities
     outputValue('info-abilities', abilities);
 }
 
 
-function getFormattedAbilities(i) {
-    let abilities = '';
-    let abilitiesUnformatted = getPokedexObjectValue(i, 'about', 'abilities');
-    for (let j = 0; j < abilitiesUnformatted.length; j++) {
-        let abilityUnformatted = abilitiesUnformatted[j];
-        let ability = getFormattedInlineNames(abilityUnformatted);
-        if (j > 0) {
-            abilities += `, ${ability}`;
-        } else {
-            abilities += ability;
-        }
+function getFormattedAbilities(i) {    // provides the formatted abilities of card i
+    let abilities = '';    // empty
+    let abilitiesUnformatted = getPokedexObjectValue(i, 'about', 'abilities');    // unformatted abilities
+    abilities = formatAbilities(abilities, abilitiesUnformatted);    // abilities with capitals
+    return abilities;
+}
+
+function formatAbilities(abilities, abilitiesUnformatted) {    // formats abilities
+    for (let i = 0; i < abilitiesUnformatted.length; i++) {
+        let abilityUnformatted = abilitiesUnformatted[i];    // unformatted ability
+        let ability = getFormattedInlineNames(abilityUnformatted);    // ability with capitals
+        (i > 0) ? abilities += `, ${ability}` : abilities += ability;    // true: ability with leading comma and space
     }
     return abilities;
 }
 
 
 async function renderCardStats(i) {
+    highlightInfoLink('card-base-stats');
     setIncludingAttribute(fileStats)
     await includeHTML('include-card-info');
     renderStatsValueCollector(i);
@@ -290,6 +307,7 @@ function setValueBarColorTotal(i) {
 
 
 async function renderCardEvolution(i) {
+    highlightInfoLink('card-evolution');
     setIncludingAttribute(fileEvolution);
     await includeHTML('include-card-info');
     renderEvolutionFamily(i);
@@ -331,6 +349,7 @@ function renderEvolutionMember(j, member) {
 
 
 async function renderCardMoves(i) {
+    highlightInfoLink('card-moves');
     setIncludingAttribute(fileMoves);
     await includeHTML('include-card-info');
     // add function()
