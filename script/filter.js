@@ -97,7 +97,7 @@ function searchPokecardById(i, input) {    // searches pokecards by id
 
 function closeSearch() {    // closes menu after submitting search
     searchPokemon = false;
-    closeMenu(true);
+    closeMenu();
     return false;
 }
 
@@ -202,6 +202,7 @@ function executeFilterPokemon() {    // rendering pokecards according to filter 
 function enableFilterPokemon(logical) {    // enables or disables filter pokemon 
     filterPokemon['enabled'] = logical;
 }
+
 
 function home() {    // sets the default settings and renders all pokecards
     setFilterSettings();

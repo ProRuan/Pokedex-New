@@ -18,7 +18,7 @@ function renderMenuNote() {    // renders a note to the menu
 
 
 async function includeMenuSearch() {   // includes the search menu
-    includeHTMLMenu(fileSearch);
+    await includeHTMLMenu(fileSearch);
     setMenuButtonByLogical(true);
     setFilterSettings();
 }
@@ -47,7 +47,7 @@ function getCommandByLogical(logical) {    // provides a command depending on a 
 
 
 async function includeMenuFilter() {    // includes the filter menu
-    includeHTMLMenu(fileFilter);
+    await includeHTMLMenu(fileFilter);
     setMenuButtonByLogical(false);
     renderFilterTypeGroup();
 }

@@ -32,23 +32,30 @@ function filterOnlyPureOrByFirst(i) {    // filters pokecard i by pure type or f
 }
 
 
-function filterPokecardOnlyPure(i) {    // Bitte bearbeiten!!!
-    let filter = getJsonObjectValue(filterPokemon, 'types');
-    let types = getPokedexObjectValue(i, 'main', 'types');
-    let pure = types.length < 2;
-    if (pure) {
-        let type = types[0];
-        let match = false;
-        for (let f = 0; f < filter.length; f++) {
-            match = type == filter[f];
-            if (match) {
-                break;
-            }
+function filterPokecardOnlyPure(i) {    // filters pokecard i by pure type
+    let filter = getJsonObjectValue(filterPokemon, 'types');    // filtering types
+    let types = getPokedexObjectValue(i, 'main', 'types');    // types
+    let pure = types.length < 2;    // true or false
+    return (pure) ? renderOnlyPureByMatch(i, filter, types) : '';
+}
+
+
+function renderOnlyPureByMatch(i, filter, types) {    // renders pokecard i if it has a pure type
+    let type = types[0];    // type
+    let match = false;
+    match = matchesFilterTypes(filter, type, match);    // true or false
+    return (match) ? renderPokecard(i) : '';
+}
+
+
+function matchesFilterTypes(filter, type, match) {    // returns true if there is a matching type
+    for (let f = 0; f < filter.length; f++) {
+        match = type == filter[f];    // true or false
+        if (match) {
+            break;
         }
-        return (match) ? renderPokecard(i) : '';
-    } else {
-        return '';
     }
+    return match;
 }
 
 
@@ -58,38 +65,34 @@ function filterByFirstOrDefault(i) {    // filters pokecard i by first type or w
 }
 
 
-function filterPokecardByFirst(i) {    // Bitte bearbeiten!!!
-    let filter = getJsonObjectValue(filterPokemon, 'types');
-    let types = getPokedexObjectValue(i, 'main', 'types');
-    let type = types[0];
+function filterPokecardByFirst(i) {    // filters pokecard i by first type
+    let filter = getJsonObjectValue(filterPokemon, 'types');    // filtering types
+    let types = getPokedexObjectValue(i, 'main', 'types');    // types
+    let type = types[0];    // type
     let match = false;
-    for (let f = 0; f < filter.length; f++) {
-        match = type == filter[f];
-        if (match) {
-            break;
-        }
-    }
+    match = matchesFilterTypes(filter, type, match);    // true or false
     return (match) ? renderPokecard(i) : '';
 }
 
 
-function filterPokecard(i) {    // Bitte bearbeiten!!!
-    let filter = getJsonObjectValue(filterPokemon, 'types');
-    let types = getPokedexObjectValue(i, 'main', 'types');
+function filterPokecard(i) {    // filters the pokecard i
+    let filter = getJsonObjectValue(filterPokemon, 'types');    // filtering types
+    let types = getPokedexObjectValue(i, 'main', 'types');    // types
     let match = false;
+    match = matchesFilterTypesLoop(filter, types, match);    // true or false
+    return (match) ? renderPokecard(i) : '';
+}
+
+
+function matchesFilterTypesLoop(filter, types, match) {    // returns true if there is a matching type
     for (let t = 0; t < types.length; t++) {
-        let type = types[t];
-        for (let f = 0; f < filter.length; f++) {
-            match = type == filter[f];
-            if (match) {
-                break;
-            }
-        }
+        let type = types[t];    // type t
+        match = matchesFilterTypes(filter, type, match);    // true or false
         if (match) {
             break;
         }
     }
-    return (match) ? renderPokecard(i) : '';
+    return match;
 }
 
 

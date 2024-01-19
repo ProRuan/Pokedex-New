@@ -50,12 +50,11 @@
         <div id="pokedex-menu" class="pokedex-menu" onclick="stop(event)">
             <div class="pokedex-menu-top-bar flex-end-center">
                 <button id="pokedex-menu-close-button" class="header-button pm-close-button flex-center-center hb-menu"
-                    onclick="closeMenu(true)"></button>
+                    onclick="closeMenu()"></button>
             </div>
             <section id="pokedex-menu-header" class="pokedex-menu-button-group">
                 <button id="search-button" class="pokedex-menu-button" onclick="includeMenuSearch()">Search</button> |
-                <button id="filter-button" class="pokedex-menu-button"
-                    onclick="includeMenuFilter()">Filter</button>
+                <button id="filter-button" class="pokedex-menu-button" onclick="includeMenuFilter()">Filter</button>
             </section>
             <section id="pokedex-menu-content" class="pokedex-menu-content"
                 include-menu-content="./templates/search.html">
