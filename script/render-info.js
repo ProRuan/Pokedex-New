@@ -90,6 +90,12 @@ function unhighlightInfoLinks() {    // unhighlights all info links
 }
 
 
+function setIncludingAttribute(file) {    // sets the attribute of 'include-card-info'
+    let content = getElement('card-info-content');    // element 'card-info-content'
+    content.setAttribute('include-card-info', file);    // html file
+}
+
+
 function setCardInfoOnClick(i) {    // sets the info links' onclick attribute
     setElementAttribute('card-about', 'onclick', `renderCardAbout(${i})`);
     setElementAttribute('card-base-stats', 'onclick', `renderCardStats(${i})`);
@@ -215,60 +221,55 @@ function formatAbilities(abilities, abilitiesUnformatted) {    // formats abilit
 }
 
 
-async function renderCardStats(i) {
+async function renderCardStats(i) {    // renders the base stats of card i
     highlightInfoLink('card-base-stats');
-    setIncludingAttribute(fileStats)
+    setIncludingAttribute(fileStats);
     await includeHTML('include-card-info');
     renderStatsValueCollector(i);
     renderCardStatsValues(i);
 }
 
 
-function setIncludingAttribute(file) {
-    let content = getElement('card-info-content');
-    content.setAttribute('include-card-info', file);
-}
 
-
-function renderCardStatsValues(i) {
-    let keys = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed', 'total'];
+function renderCardStatsValues(i) {    // renders the base stats values of card i
+    let keys = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed', 'total'];    // stats and total
     for (let j = 0; j < keys.length; j++) {
-        let key = keys[j];
-        let stat = getPokedexObjectValue(i, 'base-stats', key);
+        let key = keys[j];    // key of stat j
+        let stat = getPokedexObjectValue(i, 'base-stats', key);    // stat j
         outputValue(`td-${key}`, stat);
     }
 }
 
 
-function renderStatsValueCollector(i) {
+function renderStatsValueCollector(i) {    // renders the value bars' class with relates to stats
     let content = getElement('stats-value-collector');
-    content.innerHTML = '';
-    renderStatsValueGroup(i, content);
-    renderStatsValueTotal(i, content);
+    content.innerHTML = '';    // empty
+    renderStatsValueClasses(i, content);
+    renderStatsTotalClass(i, content);
     setValueBarColor(i);
     setValueBarColorTotal(i);
 }
 
 
-function renderStatsValueGroup(i, content) {
-    let keys = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];
+function renderStatsValueClasses(i, content) {    // renders the base stats' classes
+    let keys = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];    // stats
     for (let j = 0; j < keys.length; j++) {
-        let key = keys[j];
-        let stat = getScaledStat(i, key, 160);
-        content.innerHTML += renderStatsValue(key, stat);
+        let key = keys[j];    // key of stat j
+        let stat = getScaledStat(i, key, 160);    // scaled stat j
+        content.innerHTML += renderStatsClass(key, stat);    // renders class of stat j
     }
 }
 
 
-function getScaledStat(i, key, max) {
-    let statUnscaled = getPokedexObjectValue(i, 'base-stats', key);
-    let maxWidth = getElement(`${key}-max-bar`).offsetWidth;
-    let stat = statUnscaled / max * maxWidth;
-    return (stat > maxWidth) ? maxWidth : stat;
+function getScaledStat(i, key, max) {    // provides a scaled stat
+    let statUnscaled = getPokedexObjectValue(i, 'base-stats', key);    // unscaled stat
+    let maxWidth = getElement(`${key}-max-bar`).offsetWidth;    // length of max bar
+    let stat = statUnscaled / max * maxWidth;    // scaled stat
+    return (stat > maxWidth) ? maxWidth : stat;    // returns the max width if stat's value is too big
 }
 
 
-function renderStatsValue(key, stat) {    // Bitte umbennenen!!!
+function renderStatsClass(key, stat) {    // renders the class of stat 'key'
     return `
         .${key} {
             width: ${stat}px;
@@ -277,31 +278,31 @@ function renderStatsValue(key, stat) {    // Bitte umbennenen!!!
 }
 
 
-function renderStatsValueTotal(i, content) {
-    let total = getScaledStat(i, 'total', 720);
-    content.innerHTML += renderStatsValue('total', total);
+function renderStatsTotalClass(i, content) {    // renders the base stats total's class
+    let total = getScaledStat(i, 'total', 720);    // scaled total
+    content.innerHTML += renderStatsClass('total', total);
 }
 
 
-function setValueBarColor(i) {
-    let keys = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];
+function setValueBarColor(i) {    // sets the value bars' background color
+    let keys = ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'];    // stats
     for (let k = 0; k < keys.length; k++) {
-        let key = keys[k]
-        let stat = getPokedexObjectValue(i, 'base-stats', key);
-        let color = getValueBarColor(stat, 50);
+        let key = keys[k];    // key of stat k
+        let stat = getPokedexObjectValue(i, 'base-stats', key);    // stat k
+        let color = getValueBarColor(stat, 50);    // background color of stat k
         setClassOnCommand(`${key}-bar`, 'add', color);
     }
 }
 
 
-function getValueBarColor(stat, max) {
+function getValueBarColor(stat, max) {    // provides the background color of stat's value bar
     return (stat < max) ? 'bgc-red' : 'bgc-green';
 }
 
 
-function setValueBarColorTotal(i) {
-    let total = getPokedexObjectValue(i, 'base-stats', 'total');
-    let color = getValueBarColor(total, 300);
+function setValueBarColorTotal(i) {    // sets the total value bar's background color
+    let total = getPokedexObjectValue(i, 'base-stats', 'total');    // total
+    let color = getValueBarColor(total, 300);    // background color of total
     setClassOnCommand('total-bar', 'add', color);
 }
 
