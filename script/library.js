@@ -59,6 +59,16 @@ function outputValue(id, value) {    // outputs a value to the element 'id'
 }
 
 
+function setButtonDisabled(id, logical) {    // enables or disables the button 'id'
+    document.getElementById(id).disabled = logical;    // true or false
+}
+
+
+function setElementAttribute(id, attribute, value) {    // set the value of an element's attribute
+    document.getElementById(id).setAttribute(attribute, value);
+}
+
+
 // Async Functions
 // include html
 async function includeHTML(attribute) {    // includes a html file by attribute

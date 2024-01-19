@@ -1,78 +1,53 @@
-function openMenu() {
+function openMenu() {    // opens the pokedex menu
     setClassOnCommand('pokedex-menu-background', 'remove', 'display-none');
-
-    setClassOnCommand('pokedex-menu', 'add', 'pm-opened');
-    setElementAttribute('header-menu-button', 'onclick', 'closeMenu()');    // notwendig?
     includeMenuSearch();
 }
 
 
-function setElementAttribute(id, attribute, value) {
-    document.getElementById(id).setAttribute(attribute, value);
-}
-
-
-function closeMenu(logical) {
-    toggleMenuButtonGroup(logical);
-    setClassOnCommand('pokedex-menu', 'remove', 'pm-opened');
-
+function closeMenu() {    // closes the pokedex menu
     setClassOnCommand('pokedex-menu-background', 'add', 'display-none');
-
-    setElementAttribute('header-menu-button', 'onclick', `openMenu()`);
-    let content = getElement('pokedex-menu-content');
-    content.innerHTML = '<!-- rendering search bar or filter settings -->';
-}
-
-function toggleMenuButtonGroup(search) {
-    if (search) {
-        setTimeout(() => {
-            setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
-            setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
-        }, 125);
-    }
+    setMenuButtonByLogical(true);
+    renderMenuNote();
 }
 
 
-async function includeMenuSearch() {
-    // setElementAttribute('header-menu-button', 'onclick', 'closeMenu(true)');
-    setElementAttribute('pokedex-menu-close-button', 'onclick', 'closeMenu(true)');
-    setElementAttribute('pokedex-menu-background', 'onclick', 'closeMenu(true)');
+function renderMenuNote() {    // renders a note to the menu
+    let note = '<!-- rendering search bar or filter settings -->';    // note
+    outputValue('pokedex-menu-content', note);
+}
 
-    setElementAttribute('pokedex-menu-content', 'include-menu-content', fileSearch);
-    await includeHTML('include-menu-content');
-    setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
-    setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
-    setButtonDisabled('search-button', true);
-    setButtonDisabled('filter-button', false);
+
+async function includeMenuSearch() {   // includes the search menu
+    includeHTMLMenu(fileSearch);
+    setMenuButtonByLogical(true);
     setFilterSettings();
 }
 
 
-function setFilterSettings() {
-    filterPokemon = {
-        'enabled': false,
-        'types': [],
-        'by-first': false,
-        'only-pure': false
-    };
-}
-
-
-function setButtonDisabled(id, logical) {
-    document.getElementById(id).disabled = logical;
-}
-
-
-async function includeMenuFilter() {
-    // setElementAttribute('header-menu-button', 'onclick', 'closeMenu(false)');
-    setElementAttribute('pokedex-menu-close-button', 'onclick', 'closeMenu(false)');
-    setElementAttribute('pokedex-menu-background', 'onclick', 'closeMenu(false)');
-
-    setElementAttribute('pokedex-menu-content', 'include-menu-content', filefilter);
+async function includeHTMLMenu(file) {    // includes the pokedex menu's subcontent
+    setElementAttribute('pokedex-menu-content', 'include-menu-content', file);
     await includeHTML('include-menu-content');
-    setClassOnCommand('search-button', 'toggle', 'pokedex-menu-button-active');
-    setClassOnCommand('filter-button', 'toggle', 'pokedex-menu-button-active');
-    setButtonDisabled('search-button', false);
-    setButtonDisabled('filter-button', true);
+}
+
+
+function setMenuButtonByLogical(logical) {    // sets the menu buttons depending on a logical value
+    setButtonDisabled('search-button', logical);
+    let command = getCommandByLogical(logical);
+    setClassOnCommand('search-button', command, 'pokedex-menu-button-active');
+    logical = setLogical(logical);
+    setButtonDisabled('filter-button', logical);
+    command = getCommandByLogical(logical);
+    setClassOnCommand('filter-button', command, 'pokedex-menu-button-active');
+}
+
+
+function getCommandByLogical(logical) {    // provides a command depending on a logical value
+    return (logical) ? 'add' : 'remove';
+}
+
+
+async function includeMenuFilter() {    // includes the filter menu
+    includeHTMLMenu(fileFilter);
+    setMenuButtonByLogical(false);
     renderFilterTypeGroup();
 }

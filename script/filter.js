@@ -207,3 +207,13 @@ function home() {    // sets the default settings and renders all pokecards
     setFilterSettings();
     renderPokecardCollection();
 }
+
+
+function setFilterSettings() {    // sets the filter's default settings
+    filterPokemon = {
+        'enabled': false,
+        'types': [],
+        'by-first': false,
+        'only-pure': false
+    };
+}
