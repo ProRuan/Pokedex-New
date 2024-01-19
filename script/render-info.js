@@ -368,75 +368,66 @@ async function renderCardMoves(i) {    // renders the moves of card i
     highlightInfoLink('card-moves');
     setIncludingAttribute(fileMoves);
     await includeHTML('include-card-info');
-    renderMoves(i);
+    renderTBodyMoves(i);
 }
 
 
-function renderMoves(i) {    // renders the moves i
+function renderTBodyMoves(i) {    // renders the table body 'moves' of card i
     let content = getElement('tb-moves');    // element 'tb-moves'
     content.innerHTML = '';    // empty
-    fillTableMoves(i, content);
+    renderTableRowsMoves(i, content);
 }
 
 
-function fillTableMoves(i, content) {
-    let [levels, names, methods] = getLevelsNamesMethods(i);
-    [levels, names, methods] = sortByLevel(levels, names, methods);
+function renderTableRowsMoves(i, content) {    // renders the table rows of moves i
+    let [levels, names, methods] = getLevelsNamesMethods(i);    // levels, names and methods of moves
 
-    // for (let j = 0; j < levels.length; j++) {
-    //     content.innerHTML += 'in Arbeit';
-    // }
-
+    [levels, names, methods] = sortByLevel(levels, names, methods);    // sorted levels, names and methods
+    // [levels, names, methods] = sortByLevelProto(levels, names, methods);
 
     for (let k = 0; k < methods.length; k++) {
-        let method = methods[k];
-        let byLevelUp = method == 'level-up';
+        let method = methods[k];    // method k
+        let byLevelUp = getBoolean(method, 'level-up');    // true or false
         if (byLevelUp) {
-            // let name = names[k];
-            let nameUnformatted = names[k];
-            let name = getFormattedInlineNames(nameUnformatted);
-            let level = levels[k];
-
-            let moveData = `
-            <tr>
-                <th id="th-level-${k}" class="th-moves">${level}</th>
-                <td id="td-name-${k}" class="td-moves">${name}</td>
-            </tr>
-        `;
-            content.innerHTML += moveData;
+            let nameUnformatted = names[k];    // unformatted name
+            let name = getFormattedInlineNames(nameUnformatted);    // name with capital
+            let level = levels[k];    // level k
+            content.innerHTML += writesMoveData(k, name, level);    // writes the table row of move k
         }
     }
 }
-// render yellow???
 
 
-function getLevelsNamesMethods(i) {
-    let keys = [i, 'moves', 'red-blue', 'levels'];
-    let levels = getJsonObjectDeepValue(pokedex, keys);
+function getLevelsNamesMethods(i) {    // provides the levels, names and methods of moves i
+    let keys = [i, 'moves', 'red-blue', 'levels'];    // keys of subsequent json
+    let levels = getJsonObjectDeepValue(pokedex, keys);    // levels
     keys = [i, 'moves', 'red-blue', 'names'];
-    let names = getJsonObjectDeepValue(pokedex, keys);
+    let names = getJsonObjectDeepValue(pokedex, keys);    // names
     keys = [i, 'moves', 'red-blue', 'methods'];
-    let methods = getJsonObjectDeepValue(pokedex, keys);
+    let methods = getJsonObjectDeepValue(pokedex, keys);    // methods
     return [levels, names, methods];
 }
 
 
-function sortByLevel(levels, namesUnsorted, methodsUnsorted) {
-    let copy = [];
-    for (let c = 0; c < levels.length; c++) {
-        let level = levels[c];
-        copy.push(level);
-    }
+function writesMoveData(k, name, level) {    // writes the table row of move k
+    return `
+        <tr>
+            <th id="th-level-${k}" class="th-moves">${level}</th>
+            <td id="td-name-${k}" class="td-moves">${name}</td>
+        </tr>
+    `;
+}
 
-    levels = [];
-    let names = [];
-    let methods = [];
+
+
+
+function sortByLevel(levelsUnsorted, namesUnsorted, methodsUnsorted) {
+    let copy = copyArray(levelsUnsorted);
+    let [levels, names, methods] = setLevelsNamesMethods();
 
     for (let k = 0; k < copy.length; k++) {
-        let min = 100;
-        let index = -1;
-        let name = 'n';
-        let method = 'm';
+        let [min, index] = setMinIndex();
+        let [name, method] = setNameMethod();
         for (let j = 0; j < copy.length; j++) {
             let level = copy[j];
             if (level < min && level > -1) {
@@ -452,10 +443,103 @@ function sortByLevel(levels, namesUnsorted, methodsUnsorted) {
         copy[index] = -1;
     }
     return [levels, names, methods];
-    // alert(levels);
 }
 // levels and levelsUnsorted!!!
 
-// if id = current leicht einfaerben!!!
 
-// style buttons
+function copyArray(values) {    // provides a copy of an array
+    let copy = [];    // empty
+    for (let i = 0; i < values.length; i++) {
+        let value = values[i];    // value i
+        copy.push(value);    // add value i to copy
+    }
+    return copy;
+}
+
+
+function setLevelsNamesMethods() {
+    let levels = [];
+    let names = [];
+    let methods = [];
+    return [levels, names, methods];
+}
+
+
+function setMinIndex() {
+    let min = 100;
+    let index = -1;
+    return [min, index];
+}
+
+
+function setNameMethod() {
+    let name = 'n';
+    let method = 'm';
+    return [name, method];
+}
+
+
+
+
+
+
+let test = [[1, 3, 2], ['tackle', 'ruckzuckhieb', 'heuler'], ['level-up', 'egg', 'level-up']];
+
+function sortByLevelProto(levelsUnsorted, namesUnsorted, methodsUnsorted) {
+    let copy = copyArray(levelsUnsorted);
+    let [levels, names, methods] = setLevelsNamesMethods();
+
+    let parameters = [
+        copy, namesUnsorted, methodsUnsorted, levels, names, methods
+    ];
+
+    [levels, names, methods] = sortLevels(parameters);
+    return [levels, names, methods];
+}
+
+
+function sortLevels(parameters) {
+    let [copy, namesUnsorted, methodsUnsorted, levels, names, methods] = parameters;
+    for (let k = 0; k < copy.length; k++) {
+        let [min, index, name, method] = setMinIndexNameMethod();
+
+        parameters = [
+            copy, namesUnsorted, methodsUnsorted,
+            min, index, name, method
+        ];
+
+        [min, index, name, method] = getLowestLevel(parameters);
+        levels.push(min);
+        names.push(name);
+        methods.push(method);
+        copy[index] = -1;
+    }
+    parameters = [levels, names, methods];
+    return parameters;
+}
+
+
+function setMinIndexNameMethod() {
+    let min = 100;
+    let index = -1;
+    let name = 'n';
+    let method = 'm';
+    let parameters = [min, index, name, method];
+    return parameters;
+}
+
+
+function getLowestLevel(parameters) {
+    let [copy, namesUnsorted, methodsUnsorted, min, index, name, method] = parameters;
+    for (let j = 0; j < copy.length; j++) {
+        let level = copy[j];
+        if (level < min && level > -1) {
+            min = level;
+            name = namesUnsorted[j];
+            method = methodsUnsorted[j];
+            index = j;
+        }
+    }
+    parameters = [min, index, name, method];
+    return parameters;
+}

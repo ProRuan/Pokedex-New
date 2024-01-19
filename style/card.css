@@ -104,7 +104,7 @@ dialog[open] {
 
 .link-active {
     padding-bottom: 16px;
-    border-bottom: 2px solid #7986DF;
+    box-shadow: 0 2px #7986DF;
 }
 
 .card-info-content {
