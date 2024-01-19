@@ -307,7 +307,7 @@ function setValueBarColorTotal(i) {    // sets the total value bar's background 
 }
 
 
-async function renderCardEvolution(i) {
+async function renderCardEvolution(i) {   // renders the evolution of card i
     highlightInfoLink('card-evolution');
     setIncludingAttribute(fileEvolution);
     await includeHTML('include-card-info');
@@ -315,28 +315,34 @@ async function renderCardEvolution(i) {
 }
 
 
-function renderEvolutionFamily(i) {    // think about the names of subsequent funcitons!!!
-    let content = getElement('evolution-family');
-    content.innerHTML = '';
+function renderEvolutionFamily(i) {    // renders the evolution family of card i
+    let content = getElement('evolution-family');    // element 'evolution-family'
+    content.innerHTML = '';    // empty
     fillEvolutionFamily(i, content);
 }
 
 
-function fillEvolutionFamily(i, content) {
-    let family = pokedex[i]['evolution'];
-    let max = family.length;
+function fillEvolutionFamily(i, content) {    // fills the element 'evolution-family'
+    let family = getEvolutionIndices(i);    // indices of family members
+    let max = family.length;    // number of family members
     for (let j = 0; j < max; j++) {
-        let member = family[j];
+        let member = family[j];    // member of family
         content.innerHTML += renderEvolutionMember(j, member);
     }
 }
 
 
-// class evolution-member text links - bild rechts!!!
-function renderEvolutionMember(j, member) {
-    let image = getImage(member);
-    let name = getFormattedName(member);
-    let id = getFormattedId(member);
+function getEvolutionIndices(i) {    // provides the indices of evolution family
+    let keys = [i, 'evolution'];    // keys of subsequent json
+    let ids = getJsonObjectDeepValue(pokedex, keys);    // indices of evolution family
+    return ids;
+}
+
+
+function renderEvolutionMember(j, member) {    // renders the evolution member j
+    let image = getImage(member);    // artwork
+    let name = getFormattedName(member);    // name
+    let id = getFormattedId(member);    // id
     return `
         <div id="evolution-member-${j}">
             <img class="evolution-artwork" src="${image}" alt="${name}">
@@ -346,26 +352,18 @@ function renderEvolutionMember(j, member) {
 }
 
 
-// render info-link-underline!!!
-
-
-async function renderCardMoves(i) {
+async function renderCardMoves(i) {    // renders the moves of card i
     highlightInfoLink('card-moves');
     setIncludingAttribute(fileMoves);
     await includeHTML('include-card-info');
-    // add function()
-
     renderMoves(i);
 }
-// update moves.html!!!
 
 
-function renderMoves(i) {
-    let content = getElement('tb-moves');
-    content.innerHTML = '';
-    // renderMovesTableRow(i, content);
+function renderMoves(i) {    // renders the moves i
+    let content = getElement('tb-moves');    // element 'tb-moves'
+    content.innerHTML = '';    // empty
     fillTableMoves(i, content);
-    // content.innerHTML = 'table moves';
 }
 
 
