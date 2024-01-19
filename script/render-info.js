@@ -5,6 +5,18 @@ async function showCard(i) {    // shows the pokecard i
 }
 
 
+function closeCard() {    // closes a card
+    closeDialog();
+    renderDialogNote();
+}
+
+
+function renderDialogNote() {    // renders a note to the dialog
+    let note = '<!-- rendering card -->';    // note
+    outputValue('dialog', note);
+}
+
+
 async function renderCardValues(i) {    // renders the values of card i
     setCardColor(i);
     renderCardMain(i);
