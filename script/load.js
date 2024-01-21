@@ -1,9 +1,8 @@
 // Variables
 let pokelist = 151;    // number of loading pokemon (kanto pokedex)
 let seed = 0;    // start value of current loading round
-let limit = 24;    // loading limit of current loading round
-let step = 6;    // loading step
-let rounds = Math.ceil(pokelist / step);    // loading rounds
+let limit = 6;    // loading limit of current loading round
+let step = 18;    // loading step
 let progress = 0;    // current percentage of progress bar
 let pokemon = [];    // receives the datasets of all 151 kanto pokemon
 let species = [];    // receives the species of all 151 kanto pokemon
@@ -11,7 +10,7 @@ let species = [];    // receives the species of all 151 kanto pokemon
 
 // Functions
 async function init() {    // initializes the pokedex app
-    for (let i = 0; i < rounds; i++) {
+    while (seed < pokelist) {
         await loadPokedataStep();
         updateLoadingValues();
     }
@@ -34,12 +33,11 @@ async function loadPokedataStep() {    // loads a pokedata step
 
 
 function renderProgress() {    // renders the progress bar
-    let progressUnscaled = limit / pokelist * 100;    // progress as percentage
-    let loadingWidth = getLoadingWidth();
-    progress = Math.round(progressUnscaled / 100 * loadingWidth);    // scaled progress
-    let progressClass = renderStatsClass('progress-bar-value', progress);    // rendering code
+    let loadingWidth = getLoadingWidth();    // width of progress bar
+    progress = Math.round((limit / pokelist) * loadingWidth);    // value of progress
+    let progressClass = renderStatsClass('progress-value-bar', progress);    // rendering code
     outputValue('stats-value-collector', progressClass);
-    (limit == pokelist) ? renderProgressFinale() : false;
+    (limit < pokelist) ? false : renderProgressFinale();
 }
 
 

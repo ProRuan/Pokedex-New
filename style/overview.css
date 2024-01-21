@@ -54,7 +54,7 @@ button {
     position: relative;
 }
 
-.progress-bar-value {
+.progress-value-bar {
     height: 24px;
     width: 0;
     background-color: #7986DF;
@@ -70,7 +70,7 @@ button {
     text-align: center;
     color: white;
     position: absolute;
-    z-index: 10;
+    z-index: 5;
     top: calc(50% - 8px);
     left: calc(50% - 20px);
 }
