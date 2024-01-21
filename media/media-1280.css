@@ -1,0 +1,13 @@
+@media (min-width: 1280px) {
+    .header {
+        padding: 40px 64px 0 64px;
+    }
+
+    .progress-bar {
+        width: 512px;
+    }
+
+    .pokedex-main {
+        padding: 0 64px 32px 64px;
+    }
+}

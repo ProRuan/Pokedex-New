@@ -1,89 +1,24 @@
-async function showCard(i) {    // shows the pokecard i
-    openDialog();
-    await includeHTML('include-card');
-    renderCardValues(i);
-}
-
-
-function closeCard() {    // closes a card
-    closeDialog();
-    renderDialogNote();
-}
-
-
-function renderDialogNote() {    // renders a note to the dialog
-    let note = '<!-- rendering card -->';    // note
-    outputValue('dialog', note);
-}
-
-
-async function renderCardValues(i) {    // renders the values of card i
-    setCardColor(i);
-    renderCardMain(i);
-    renderCardAbout(i);
-    setCardInfoOnClick(i);
-}
-
-
-function setCardColor(i) {    // sets the background color of card i
-    let color = getColor(i, 0);    // class name of background color
-    replaceClasses('card', 'grass', color);
-}
-
-
-function renderCardMain(i) {    // renders the main content of card i
-    renderCardName(i);
-    renderCardId(i);
-    renderCardTypeGroup(i);
-    renderCardArtwork(i);
-}
-
-
-function renderCardName(i) {    // renders the name of card i
-    let name = getFormattedNameFemale(i);    // formatted name
-    outputValue('card-name', name);
-}
-
-
-function renderCardId(i) {    // renders the id of card i
-    let id = getFormattedId(i);    // formatted id
-    outputValue('card-id', id);
-}
-
-
-function renderCardTypeGroup(i) {    // renders the type group of card i
-    let types = getPokedexObjectValue(i, 'main', 'types');    // types
-    let typeGroup = getElement('card-type-group');
-    typeGroup.innerHTML = '';
-    for (let j = 0; j < types.length; j++) {
-        typeGroup.innerHTML += renderCardType(i, j);    // type j
-    }
-}
-
-
-function renderCardType(i, j) {    // renders the type j of card i
-    let color = getColor(i, j);    // part of class name of background color
-    let type = getFormattedType(i, j);    // type j
-    return `<div id="card-type-${j}" class="card-type type-${color}">${type}</div>`;
-}
-
-
-function renderCardArtwork(i) {    // renders the artwork of card i
-    let image = getPokedexObjectValue(i, 'main', 'image');    // artwork
-    setImageSource('card-artwork', image);
-}
-
-
-function setImageSource(id, image) {    // sets the src of element 'id'
-    document.getElementById(id).src = image;
-}
-
-
 async function renderCardAbout(i) {    // renders the info 'about' of card i
+    setInfoBarButtons('card-about');
     highlightInfoLink('card-about');
     setIncludingAttribute(fileAbout);
     await includeHTML('include-card-info');
     renderCardAboutValues(i);
+}
+
+
+function setInfoBarButtons(id) {    // sets the info bar button enabled or disabled
+    enableInfoBarButtons();
+    setButtonDisabled(id, true);
+}
+
+
+function enableInfoBarButtons() {    // enables the info bar buttons
+    let ids = ['card-about', 'card-base-stats', 'card-evolution', 'card-moves'];    // ids of info bar buttons
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];    // id i
+        setButtonDisabled(id, false);
+    }
 }
 
 
@@ -105,14 +40,6 @@ function unhighlightInfoLinks() {    // unhighlights all info links
 function setIncludingAttribute(file) {    // sets the attribute of 'include-card-info'
     let content = getElement('card-info-content');    // element 'card-info-content'
     content.setAttribute('include-card-info', file);    // html file
-}
-
-
-function setCardInfoOnClick(i) {    // sets the info links' onclick attribute
-    setElementAttribute('card-about', 'onclick', `renderCardAbout(${i})`);
-    setElementAttribute('card-base-stats', 'onclick', `renderCardStats(${i})`);
-    setElementAttribute('card-evolution', 'onclick', `renderCardEvolution(${i})`);
-    setElementAttribute('card-moves', 'onclick', `renderCardMoves(${i})`);
 }
 
 
@@ -234,6 +161,7 @@ function formatAbilities(abilities, abilitiesUnformatted) {    // formats abilit
 
 
 async function renderCardStats(i) {    // renders the base stats of card i
+    setInfoBarButtons('card-base-stats');
     highlightInfoLink('card-base-stats');
     setIncludingAttribute(fileStats);
     await includeHTML('include-card-info');
@@ -320,6 +248,7 @@ function setValueBarColorTotal(i) {    // sets the total value bar's background 
 
 
 async function renderCardEvolution(i) {   // renders the evolution of card i
+    setInfoBarButtons('card-evolution');
     highlightInfoLink('card-evolution');
     setIncludingAttribute(fileEvolution);
     await includeHTML('include-card-info');
@@ -365,6 +294,7 @@ function renderEvolutionMember(j, member) {    // renders the evolution member j
 
 
 async function renderCardMoves(i) {    // renders the moves of card i
+    setInfoBarButtons('card-moves');
     highlightInfoLink('card-moves');
     setIncludingAttribute(fileMoves);
     await includeHTML('include-card-info');

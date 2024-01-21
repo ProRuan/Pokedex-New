@@ -1,6 +1,21 @@
 // Functions
+function renderPokecardCollectionLoad() {    // renders the loading pokecards
+    let pokecardCollector = getElement('pokecard-collector');    // element 'pokecard-collector'
+    fillPokecardCollectorLoad(pokecardCollector);
+}
+
+
+function fillPokecardCollectorLoad(pokecardCollector) {    // fills the loading pokecardCollector
+    for (let i = seed; i < limit; i++) {    // 151 pokecards
+        pokecardCollector.innerHTML += `
+            ${searchFilterPokecard(i)}
+        `;
+    }
+}
+
+
 function renderPokecardCollection() {    // renders the pokecards
-    pokecardCollector = getElement('pokecard-collector');    // element 'pokecard-collector'
+    let pokecardCollector = getElement('pokecard-collector');    // element 'pokecard-collector'
     pokecardCollector.innerHTML = '';    // empties pokecardCollector
     fillPokecardCollector(pokecardCollector);
 }
@@ -244,4 +259,93 @@ function writePokecardImage(i) {    // writes the image of pokecard i
 
 function getImage(i) {    // provides the artwork of pokecard i
     return getPokedexObjectValue(i, 'main', 'image');
+}
+
+
+async function showCard(i) {    // shows the pokecard i
+    openDialog();
+    await includeHTML('include-card');
+    renderCardValues(i);
+}
+
+
+function closeCard() {    // closes a card
+    closeDialog();
+    renderDialogNote();
+}
+
+
+function renderDialogNote() {    // renders a note to the dialog
+    let note = '<!-- rendering card -->';    // note
+    outputValue('dialog', note);
+}
+
+
+async function renderCardValues(i) {    // renders the values of card i
+    setCardColor(i);
+    renderCardMain(i);
+    renderCardAbout(i);
+    setCardInfoOnClick(i);
+}
+
+
+function setCardColor(i) {    // sets the background color of card i
+    let color = getColor(i, 0);    // class name of background color
+    replaceClasses('card', 'grass', color);
+}
+
+
+function renderCardMain(i) {    // renders the main content of card i
+    renderCardName(i);
+    renderCardId(i);
+    renderCardTypeGroup(i);
+    renderCardArtwork(i);
+}
+
+
+function renderCardName(i) {    // renders the name of card i
+    let name = getFormattedNameFemale(i);    // formatted name
+    outputValue('card-name', name);
+}
+
+
+function renderCardId(i) {    // renders the id of card i
+    let id = getFormattedId(i);    // formatted id
+    outputValue('card-id', id);
+}
+
+
+function renderCardTypeGroup(i) {    // renders the type group of card i
+    let types = getPokedexObjectValue(i, 'main', 'types');    // types
+    let typeGroup = getElement('card-type-group');
+    typeGroup.innerHTML = '';
+    for (let j = 0; j < types.length; j++) {
+        typeGroup.innerHTML += renderCardType(i, j);    // type j
+    }
+}
+
+
+function renderCardType(i, j) {    // renders the type j of card i
+    let color = getColor(i, j);    // part of class name of background color
+    let type = getFormattedType(i, j);    // type j
+    return `<div id="card-type-${j}" class="card-type type-${color}">${type}</div>`;
+}
+
+
+function renderCardArtwork(i) {    // renders the artwork of card i
+    let image = getPokedexObjectValue(i, 'main', 'image');    // artwork
+    setImageSource('card-artwork', image);
+}
+
+
+function setImageSource(id, image) {    // sets the src of element 'id'
+    document.getElementById(id).src = image;
+}
+
+
+function setCardInfoOnClick(i) {    // sets the info links' onclick attribute
+    setElementAttribute('card-about', 'onclick', `renderCardAbout(${i})`);
+    setElementAttribute('card-base-stats', 'onclick', `renderCardStats(${i})`);
+    setElementAttribute('card-evolution', 'onclick', `renderCardEvolution(${i})`);
+    setElementAttribute('card-moves', 'onclick', `renderCardMoves(${i})`);
 }

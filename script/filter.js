@@ -160,9 +160,7 @@ function spliceFilterType(type) {    // deletes a type from the filter
 function setFilterByFirst(logical) {    // settings of filtering by first type
     setFilter('by-first', logical);
     setFilterButton('filter-by-first', 'condition');
-    setButtonDisabled('filter-only-pure', logical);
-    logical = setLogical(logical);
-    setClassOnCommand('filter-only-pure', 'toggle', 'filter-condition');
+    logical = setLogical(logical);    // true or false
     setElementAttribute('filter-by-first', 'onclick', `setFilterByFirst(${logical})`);
     executeFilterPokemon();
 }
@@ -181,9 +179,7 @@ function setLogical(value) {    // sets the converse boolean value
 function setFilterOnlyPure(logical) {    // settings of filtering only pure types
     setFilter('only-pure', logical);
     setFilterButton('filter-only-pure', 'condition');
-    setButtonDisabled('filter-by-first', logical);
-    logical = setLogical(logical);
-    setClassOnCommand('filter-by-first', 'toggle', 'filter-condition');
+    logical = setLogical(logical);    // true or false
     setElementAttribute('filter-only-pure', 'onclick', `setFilterOnlyPure(${logical})`);
     executeFilterPokemon();
 }

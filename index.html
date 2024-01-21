@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./fonts/font-face.css">
     <link rel="stylesheet" href="./media/media-400.css">
     <link rel="stylesheet" href="./media/media-640.css">
+    <link rel="stylesheet" href="./media/media-1280.css">
 
     <style id="stats-value-collector">
         /* rendering value-bar classes of base stats */
@@ -34,8 +35,15 @@
         <!-- rendering card -->
     </dialog>
 
-    <header class="header flex-between-center">
+    <header class="header">
         <button id="header-home-button" class="header-button flex-center-center" onclick="home()">H</button>
+        <div id="loading-bar">
+            <div id="progress-bar" class="progress-bar">
+                <div id="progress-bar-value" class="progress-bar-value">
+                    <output id="loading-text" class="loading-text">loading</output>
+                </div>
+            </div>
+        </div>
         <button id="header-menu-button" class="header-button flex-center-center hb-menu" onclick="openMenu()"></button>
     </header>
 

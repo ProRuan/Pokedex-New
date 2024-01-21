@@ -98,12 +98,25 @@ dialog[open] {
     line-height: 12px;
 }
 
-.c-pointer {
-    cursor: pointer;
+.info-link {
+    padding: 0 0 16px 0;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 12px;
+    color: black;
+    background-color: transparent;
+    border: unset;
+}
+
+.info-link:hover {
+    box-shadow: 0 2px #7986DF;
+}
+
+.info-link:disabled {
+    cursor: unset;
 }
 
 .link-active {
-    padding-bottom: 16px;
     box-shadow: 0 2px #7986DF;
 }
 

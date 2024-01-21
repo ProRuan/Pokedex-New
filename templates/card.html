@@ -19,10 +19,10 @@
 
     <article id="card-info" class="card-info">
         <nav id="card-info-bar" class="card-info-bar flex-between-center">
-            <a id="card-about" class="c-pointer link-active" onclick="renderCardAbout(0)">About</a>
-            <a id="card-base-stats" class="c-pointer" onclick="renderCardStats(0)">Base Stats</a>
-            <a id="card-evolution" class="c-pointer" onclick="renderCardEvolution(0)">Evolution</a>
-            <a id="card-moves" class="c-pointer" onclick="renderCardMoves(0)">Moves</a>
+            <button id="card-about" class="info-link link-active" onclick="renderCardAbout(0)">About</button>
+            <button id="card-base-stats" class="info-link" onclick="renderCardStats(0)">Base Stats</button>
+            <button id="card-evolution" class="info-link" onclick="renderCardEvolution(0)">Evolution</button>
+            <button id="card-moves" class="info-link" onclick="renderCardMoves(0)">Moves</button>
         </nav>
         <div id="card-info-content" class="card-info-content" include-card-info="./templates/about.html">
             <!-- rendering about, base stats, evolution or moves -->

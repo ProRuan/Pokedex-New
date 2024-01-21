@@ -7,7 +7,7 @@ load('pokedex');
 
 
 function recordPokemon() {    // records the pokemon' data
-    for (let i = 0; i < pokelist; i++) {
+    for (let i = seed; i < limit; i++) {
         pokedex[i] = {
             'main': recordMain(i),
             'about': recordAbout(i),
